@@ -9,7 +9,10 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { atividade } from "../mocks/atividades";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
+<<<<<<< HEAD
 import { sequencia } from "../mocks/sequencia";
+=======
+>>>>>>> ca43c3e413373c0e7d4392b903163da1a22db35e
 
 
 function Home() {
@@ -83,6 +86,7 @@ function Home() {
           <Column field="id" header="N°" ></Column>
           <Column field="nome" header="Nome"></Column>
       </DataTable>
+<<<<<<< HEAD
       <DataTable value={sequencia} className="sugestao-de-sequencia"  rows={8} selectionMode="single" onRowSelect={onRowSelect}>
        <Column field="semana" header="Sugestão de sequência de atividades"></Column>
        
@@ -90,6 +94,8 @@ function Home() {
 
 
 
+=======
+>>>>>>> ca43c3e413373c0e7d4392b903163da1a22db35e
     </>
   );
 }
