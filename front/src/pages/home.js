@@ -84,9 +84,8 @@ function Home() {
           <Column field="nome" header="Nome"></Column>
       </DataTable>
             
-      <DataTable value={sequencia} className="sugestao-de-sequencia"  rows={8} selectionMode="single" onRowSelect={onRowSelect}>
+      <DataTable value={sequencia} className="tabela-de-atividades"  rows={8} selectionMode="single" onRowSelect={onRowSelect}>
        <Column field="semana" header="Sugestão de sequência de atividades"></Column>
-       
       </DataTable>
     </>
   );

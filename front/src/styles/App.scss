@@ -175,3 +175,66 @@ header{
       gap: 10px;
   }
 }
+
+.user-form{
+  background-color: lightblue;
+  width: fit-content;
+  border-radius: 20px;
+  padding: 30px;
+  margin: 50px auto;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+
+  h1{
+    margin: auto;
+    margin-bottom: 25px;
+  }
+
+  .flex-row{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &:first-of-type{
+      margin-bottom: 10px;
+    }
+
+    p{
+      margin: 0;
+    }
+
+    .radio-button{
+      label{
+        margin-left: 8px;
+        color: white;
+      }
+      .p-radiobutton {
+        border: none;
+      }
+    }
+
+    .p-float-label{
+      width: fit-content;
+    }
+  }
+
+  .p-inputtext{
+    border: none;
+    border-radius: 20px;
+    margin: 15px 0;
+    &:focus{
+      box-shadow: none;
+    }
+  }
+  .p-float-label:has(input:focus) label, .p-float-label:has(input.p-filled) label{
+    top: 0.25rem;
+    color: white;
+  }
+
+  .save-button{
+    border-radius: 50px;
+    margin: auto;
+  }
+}
