@@ -1,5 +1,5 @@
 import "../styles/App.scss";
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { Stepper } from 'primereact/stepper';
@@ -7,14 +7,30 @@ import { StepperPanel } from 'primereact/stepperpanel';
 import { Button } from 'primereact/button';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { atividade } from "../mocks/atividades";
+import { atividade, treeTableAtv } from "../mocks/atividades";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
-import { sequencia } from "../mocks/sequencia";
+import { sequencia, sequencia2 } from "../mocks/sequencia";
+import { TreeTable } from 'primereact/treetable';
+import { OverlayPanel } from 'primereact/overlaypanel';
+import { MultiSelect } from "primereact/multiselect";
+        
 
 
 function Home() {
   const stepperRef = useRef(null);
   const navigate = useNavigate();
+
+  const [dataSequencia, setDataSequencia] = useState([])
+  const [dataAtividades, setDataAtividades] = useState([])
+
+  useEffect(() => {
+      sequencia.getTreeTableNodes().then((data) => setDataSequencia(data));
+      treeTableAtv.getTreeAtividade().then((data) => setDataAtividades(data));
+  }, []);
+  useEffect(() => {
+      console.log("data",dataAtividades)
+  }, [dataAtividades]);
+
 
   const accordionHeader = (text) => {
     return(
@@ -25,10 +41,12 @@ function Home() {
       </>
     )
   }
-
   const onRowSelect = (e) => {
-    const selectedAtividade = e.data;
-    navigate(`/atividades/${selectedAtividade.slug}`);
+    console.log(e)
+    const selectedAtividade = e.node.data;
+    if(selectedAtividade.slug !== ''){
+      navigate(`/atividades/${selectedAtividade.slug}`);
+    }
   };
 
 
@@ -48,47 +66,99 @@ function Home() {
           <Stepper ref={stepperRef} style={{ flexBasis: '10rem' }} className="home-stepper">
             <StepperPanel >
               <p>Este é um App destinado a pais e terapeutas e contém 1 Protocolo  de Estimulação Psicomotora para criança com TEA a fim de estimular o desenvolvimento psicomotor. </p>
-              <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
+              <Button label="Próximo" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
             </StepperPanel>
             <StepperPanel>
               <p>As atividades estão organizadas em uma  lista, e você poderá escolher a sequencia a ser realizada ou seguir uma sugestão do App.</p>
-              <Button label="Prev" icon="pi pi-arrow-left" iconPos="left" onClick={() => stepperRef.current.prevCallback()} />
-              <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
+              <Button label="Prévio" icon="pi pi-arrow-left" iconPos="left" onClick={() => stepperRef.current.prevCallback()} />
+              <Button label="Próximo" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
             </StepperPanel>
             <StepperPanel>
               <p>Antes de iniciar as atividades, organize o material e o ambiente previamente.</p>
-              <Button label="Prev" icon="pi pi-arrow-left" iconPos="left" onClick={() => stepperRef.current.prevCallback()} />
-              <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
+              <Button label="Prévio" icon="pi pi-arrow-left" iconPos="left" onClick={() => stepperRef.current.prevCallback()} />
+              <Button label="Próximo" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
             </StepperPanel>
             <StepperPanel>
               <p>Após a preparação do ambiente, inicie as atividades e não esqueça de se divertir com seu filho. </p>
-              <Button label="Prev" icon="pi pi-arrow-left" iconPos="left" onClick={() => stepperRef.current.prevCallback()} />
+              <Button label="Prévio" icon="pi pi-arrow-left" iconPos="left" onClick={() => stepperRef.current.prevCallback()} />
             </StepperPanel>
           </Stepper>
         </AccordionTab>
         <AccordionTab header={accordionHeader('Intervenções')}>
-          <p className="m-0">
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos
-            dolores et quas molestias excepturi sint occaecati cupiditate non
-            provident, similique sunt in culpa qui officia deserunt mollitia
-            animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis
-            est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-            eligendi optio cumque nihil impedit quo minus.
-          </p>
+            <TreeTable value={dataAtividades} className="tabela-de-atividades" selectionMode="single" onSelect={onRowSelect}>
+                <Column field="name" header="Nome"  expander></Column>
+            </TreeTable>
         </AccordionTab>
       </Accordion>
 
-      <DataTable value={atividade} className="tabela-de-atividades" paginator rows={8} selectionMode="single" onRowSelect={onRowSelect}>
-          <Column field="id" header="N°" ></Column>
-          <Column field="nome" header="Nome"></Column>
-      </DataTable>
-            
-      <DataTable value={sequencia} className="tabela-de-atividades"  rows={8} selectionMode="single" onRowSelect={onRowSelect}>
-       <Column field="semana" header="Sugestão de sequência de atividades"></Column>
-      </DataTable>
+      <div className="tabela-de-sequencia">
+          <table>
+            <thead><th></th></thead>
+            <tbody>
+                {sequencia2.map((data) => {
+                  console.log(data)
+                    return (
+                        <SemanaRow 
+                          data={data} 
+                          atividade={atividade}
+                        />
+                    );
+                })}
+            </tbody>
+          </table>
+      </div>
+
     </>
   );
 }
+
+const SemanaRow = ({ data, atividade }) => {
+  const op = useRef(null);
+  const [sequenciaEscolhida, setSequenciaEscolhida] = useState([]);
+
+
+  const selectSequencia = (e) => {
+    const selectedValues = e.value;
+    const newSelection = selectedValues.map(value => {
+      const option = atividade.flatMap(item => item.items).find(item => item.slug === value);
+      return {
+        nome: option.nome,
+        value: option.slug
+      };
+    });
+    console.log(newSelection)
+    setSequenciaEscolhida(newSelection);
+  };
+
+  return (
+    <tr key={data.semana}>
+      <td>
+          <div>
+              <p>{data.semana}</p>
+              <div className="atividades-escolhidas">
+                  {sequenciaEscolhida.length > 0 && sequenciaEscolhida.map((item, index) => (
+                      <span key={index}>{item.nome}</span>
+                  ))}
+              </div>
+              <button onClick={(e) => op.current.toggle(e)}>+</button>
+              <OverlayPanel ref={op}>
+                  <MultiSelect 
+                      value={sequenciaEscolhida?.map(item => item.value)}
+                      options={atividade} 
+                      optionLabel="nome" optionValue="slug"
+                      optionGroupLabel="name" optionGroupChildren="items"
+                      filter
+                      showSelectAll="false"
+                      placeholder="Selecione as atividades"
+                      fixedPlaceholder
+                      panelClassName="multiselect-atividades"
+                      onChange={selectSequencia}>
+                  </MultiSelect>
+              </OverlayPanel>
+          </div>
+      </td>          
+    </tr>
+);
+};
 
 export default Home;
