@@ -10,11 +10,12 @@ const Header = (props) => {
     <>
       <header>
           <Container className='header-content'>
-            <Link className='header-item' to="/">Home</Link>
-            <h4>|</h4>
-            <Link className='header-item' to="/">Quem Somos</Link>
-            <h4>|</h4>
-            <Link className='header-item' to="/">Contato</Link>
+            <h1>TEA</h1>
+            <div>
+              <Link className='header-item' to="/">Home</Link>
+              <Link className='header-item' to="/">Quem Somos</Link>
+              <Link className='header-item' to="/">Contato</Link>
+            </div>
           </Container>
       </header>
       {/* <header className='menu-hamburguer'>

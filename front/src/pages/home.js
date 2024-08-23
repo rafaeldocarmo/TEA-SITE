@@ -13,6 +13,11 @@ import { sequencia, sequencia2 } from "../mocks/sequencia";
 import { TreeTable } from 'primereact/treetable';
 import { OverlayPanel } from 'primereact/overlaypanel';
 import { MultiSelect } from "primereact/multiselect";
+import Banner from "../components/banner";
+import { Tooltip } from 'primereact/tooltip';
+import banner from '../images/banner.png'
+import midbanner from '../images/mid-banner.png'
+
         
 
 
@@ -52,6 +57,9 @@ function Home() {
 
   return (
     <>
+      <Banner img={banner} title="APRENDENDO A ESTIMULAR A CRIANÇA COM TEA"/>
+
+
       <Accordion collapseIcon expandIcon className="home-accordion">
         <AccordionTab header={accordionHeader('Conversando sobre TEA')}>
           <p className="m-0">
@@ -62,6 +70,8 @@ function Home() {
             Esse App se destina a pais e cuidadores com objetivo de orientar e apresentar um Protocolo de Estimulação para crianças com TEA desenvolvido e apresentado no Programa de Pós Graduação Scritu Sensu em Distúrbios do Desenvolvimento.    
           </p>
         </AccordionTab>
+
+
         <AccordionTab header={accordionHeader('Orientações')}>
           <Stepper ref={stepperRef} style={{ flexBasis: '10rem' }} className="home-stepper">
             <StepperPanel >
@@ -84,16 +94,29 @@ function Home() {
             </StepperPanel>
           </Stepper>
         </AccordionTab>
+
+
         <AccordionTab header={accordionHeader('Intervenções')}>
-            <TreeTable value={dataAtividades} className="tabela-de-atividades" selectionMode="single" onSelect={onRowSelect}>
-                <Column field="name" header="Nome"  expander></Column>
+            <TreeTable value={dataAtividades} className="tabela-de-atividades" selectionMode="single" onSelect={onRowSelect} >
+                <Column field="name" expander headerStyle={{display: 'none'}}></Column>
             </TreeTable>
         </AccordionTab>
       </Accordion>
 
+      <Banner img={midbanner} title="MONTE SUA AGENDA DE ATIVIDADES"/>
+
       <div className="tabela-de-sequencia">
           <table>
-            <thead><th></th></thead>
+            <thead>
+              <td>
+                Agenda de atividades
+                <i className="question pi pi-question-circle" 
+                data-pr-tooltip ="Para montar sua agenda semanal, clique no ícone de mais (+) ao lado da semana e escolha as atividades que deseja adicionar. Fácil e rápido!"
+                data-pr-position="left"
+                />
+                <Tooltip target=".question" className="tooltip-question"/>
+              </td>
+            </thead>
             <tbody>
                 {sequencia2.map((data) => {
                   console.log(data)
