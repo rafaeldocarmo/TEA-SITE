@@ -7,9 +7,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap');
 
 body{
-  margin: 100px 0;
+  padding: 100px 0;
   background-color: #c4e5ec;
   font-family: "Roboto", sans-serif;
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
+  max-width: 1200px;
+  margin: auto;
 }
 
 header{
@@ -48,6 +53,58 @@ header{
         text-decoration: none;
         font-weight: bold;
         font-size: 24px;
+        margin: 0;
+      }
+    }
+  }
+
+
+  @media screen and (max-width: 768px) {
+    h4, .header-item{
+      font-size: 16px;
+    }
+    .header-content{
+      gap: 15px;
+    }
+  }
+}
+
+footer{
+  position: absolute;
+  z-index: 9999;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background-color: #0b77a8;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  .header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1{
+      font-family: "Bodoni Moda SC", serif;
+      color: #c4e5ec;
+      font-weight: bold;
+    }
+    
+    div{
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+
+       .footer-item{
+        color: #c4e5ec;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
         margin: 0;
       }
     }
@@ -165,29 +222,32 @@ header{
 
 .tabela-de-atividades{
 
-  table{
-    tbody{
-      border-radius: 0 0 16px 16px;
-      
-      tr{
-        border: #0b77a8 1px solid;
-        background-color: #c4e5ec;
-      }
-      tr[aria-level="2"]{
-        td{
-          font-size: 14px;
-          button{
-            display: none;
-          }
+  .p-tree-container{
+    padding-left: 0;
+    color: #0b77a8;
+
+    .p-treenode-selectable{
+      font-weight: bold;
+
+      button{
+        color: #0b77a8;
+        &:hover{
+          background-color: #c4e5ec54;
+          color: #0b77a8;
+          border: none;
         }
       }
-    }
-  }
 
-  .p-paginator{
-    button{
-      height: 36px;
-      min-width: 36px;
+      &:hover{
+        background-color: #c4e5ec54;
+        color: #0b77a8;
+        border: none;
+      }
+    }
+    .p-treenode-leaf{
+      .p-treenode-selectable{
+        font-weight: 400;
+      }
     }
   }
 }
@@ -226,68 +286,6 @@ header{
   }
 }
 
-.user-form{
-  background-color: #0b77a8;
-  width: fit-content;
-  border-radius: 20px;
-  padding: 30px;
-  margin: 50px auto;
-  color: white;
-
-  display: flex;
-  flex-direction: column;
-
-  h1{
-    margin: auto;
-    margin-bottom: 25px;
-  }
-
-  .flex-row{
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-    &:first-of-type{
-      margin-bottom: 10px;
-    }
-
-    p{
-      margin: 0;
-    }
-
-    .radio-button{
-      label{
-        margin-left: 8px;
-        color: white;
-      }
-      .p-radiobutton {
-        border: none;
-      }
-    }
-
-    .p-float-label{
-      width: fit-content;
-    }
-  }
-
-  .p-inputtext{
-    border: none;
-    border-radius: 20px;
-    margin: 15px 0;
-    &:focus{
-      box-shadow: none;
-    }
-  }
-  .p-float-label:has(input:focus) label, .p-float-label:has(input.p-filled) label{
-    top: 0.25rem;
-    color: white;
-  }
-
-  .save-button{
-    border-radius: 50px;
-    margin: auto;
-  }
-}
 
 .tabela-de-sequencia{
   padding: 30px;
@@ -303,8 +301,9 @@ header{
         border-radius: 10px 10px 0 0; 
         color: white;
         padding: 0 30px;
-
+        
         .question{
+          border: #0b77a8 1px solid;
           position: absolute;
           right: 30px;
           top: 50%;
@@ -316,30 +315,46 @@ header{
 
     tbody{
       margin: 0 1px;
+      background-color: white;
+      margin: 0 10px;
       tr{
         height: 50px;
-        border: 1px solid gray;
         border-top: none;
+        border: #0b77a8 1px solid;
+        
         td{
           padding: 15px;
           vertical-align: top;
           position: relative;
 
+          p{
+            margin-bottom: 10px;
+            color: #0b77a8;
+            font-weight: bold;
+          }
           .atividades-escolhidas{
-            p{
-              margin-bottom: 10px;
-            }
-            span{
+            label{
               padding: 8px;
               border: 1px solid #0b77a8;
               color: #0b77a8;
               margin-right: 10px;
+              margin-bottom: 10px;
               border-radius: 10px;
-              line-height: 50px;
+              font-size: 14px;
+              cursor: pointer;
+
+              &.check{
+                background-color: #0b77a8;
+                color: #fff;
+              }
+
+            }
+            .checkbox-progress{
+              display: none;
             }
           }
 
-          button{
+          button, .multiselect-face{
             border: solid 1px #0b77a8;
             background-color: none;
             color: #0b77a8;
@@ -349,6 +364,26 @@ header{
             position: absolute;
             top: 20px;
             right: 20px;
+
+            .p-multiselect-label-container{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              .p-multiselect-label{
+                padding: 0;
+                font-size: 20px;
+                color: #0b77a8;
+
+                &:hover{
+                  color: white;
+                }
+              }
+            }
+
+            .p-multiselect-trigger{
+              display: none;
+            }
 
             &:hover{
               background-color: #0b77a8;
@@ -376,4 +411,33 @@ header{
 
 .tooltip-question{
   width: 200px;
+}
+
+.p-progressbar{
+  height: 20px;
+  margin-top: 50px;
+  .p-progressbar-value{
+    background-color: #0b77a8;
+  }
+}
+
+
+// EXCLUIR
+.p-tabview-nav, .p-tabview-panels{
+  background-color: #c4e5ec;
+  .p-tabview-select{
+
+  }
+}
+.p-tabview-nav{
+  margin-bottom: 0;
+  padding: 0 4rem;
+  border: none;
+
+  a{
+    border: #0b77a8 1px solid;
+    color: #0b77a8;
+    margin-right: 16px;
+    text-decoration: none;
+  }
 }

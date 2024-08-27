@@ -14,7 +14,7 @@ const Header = (props) => {
             <div>
               <Link className='header-item' to="/">Home</Link>
               <Link className='header-item' to="/">Quem Somos</Link>
-              <Link className='header-item' to="/">Contato</Link>
+              <Link className='header-item' to="/login">Login</Link>
             </div>
           </Container>
       </header>

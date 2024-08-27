@@ -218,194 +218,143 @@ export const treeTableAtv = {
   getTree(){
     return[
       {
-          key: '0',
-          data: {
-              name: 'HABILIDADES SOCIAIS',
-              slug: ''
+        "key": "0",
+        "label": "HABILIDADES SOCIAIS",
+        "slug": "",
+        "children": [
+          {
+            "key": "0-0",
+            "label": "BRINCAR LIVRE",
+            "slug": "brincar-livre"
           },
-          children: [
-              {
-                  key: '0-0',
-                  data: {
-                      name: 'BRINCAR LIVRE',
-                      slug: 'brincar-livre'
-                  }
-              },
-              {
-                  key: '0-1',
-                  data: {
-                      name: 'BRINCAR DIRECIONADO COM MEDIADOR',
-                      slug: 'brincar-direcionado-com-mediador'
-                  }
-              },
-              {
-                  key: '0-2',
-                  data: {
-                      name: 'ATIVIDADES DE ROTINAS SENSORIAIS',
-                      slug: 'atividades-de-rotinas-sensoriais'
-                  }
-              },
-              {
-                  key: '0-3',
-                  data: {
-                      name: 'PINTURA COM LAPIS DE COR/GIZ DE CERA',
-                      slug: 'pintura-com-lapis-de-cor-giz-de-cera'
-                  }
-              },
-              {
-                  key: '0-4',
-                  data: {
-                      name: 'ATIVIDADES NA PISCINA DE BOLINHAS',
-                      slug: 'atividades-na-piscina-de-bolinhas'
-                  }
-              }
-          ]
+          {
+            "key": "0-1",
+            "label": "BRINCAR DIRECIONADO COM MEDIADOR",
+            "slug": "brincar-direcionado-com-mediador"
+          },
+          {
+            "key": "0-2",
+            "label": "ATIVIDADES DE ROTINAS SENSORIAIS",
+            "slug": "atividades-de-rotinas-sensoriais"
+          },
+          {
+            "key": "0-3",
+            "label": "PINTURA COM LAPIS DE COR/GIZ DE CERA",
+            "slug": "pintura-com-lapis-de-cor-giz-de-cera"
+          },
+          {
+            "key": "0-4",
+            "label": "ATIVIDADES NA PISCINA DE BOLINHAS",
+            "slug": "atividades-na-piscina-de-bolinhas"
+          }
+        ]
       },
       {
-          key: '1',
-          data: {
-              name: 'HABILIDADES DE COMUNICAÇÃO E LINGUAGEM',
-              slug: ''
+        "key": "1",
+        "label": "HABILIDADES DE COMUNICAÇÃO E LINGUAGEM",
+        "slug": "",
+        "children": [
+          {
+            "key": "1-0",
+            "label": "ATIVIDADES COM FIGURAS",
+            "slug": "atividades-com-figuras"
           },
-          children: [
-              {
-                  key: '1-0',
-                  data: {
-                      name: 'ATIVIDADES COM FIGURAS',
-                      slug: 'atividades-com-figuras'
-                  }
-              },
-              {
-                  key: '1-1',
-                  data: {
-                      name: 'JOGO SIMBÓLICO',
-                      slug: 'jogo-simbolico'
-                  }
-              },
-              {
-                  key: '1-2',
-                  data: {
-                      name: 'ORGANIZAÇÃO DOS BRINQUEDOS E DO AMBIENTE',
-                      slug: 'organizacao-dos-brinquedos-e-do-ambiente'
-                  }
-              },
-              {
-                  key: '1-3',
-                  data: {
-                      name: 'ESTIMULAÇÃO DA COMUNICAÇÃO',
-                      slug: 'estimulaçao-da-comunicacao'
-                  }
-              },
-              {
-                  key: '1-4',
-                  data: {
-                      name: 'ENSINO DE IMITAÇÃO',
-                      slug: 'ensino-de-imitação'
-                  }
-              },
-              {
-                  key: '1-5',
-                  data: {
-                      name: 'TRANSIÇÃO DE ATIVIDADES E VARIAÇÃO',
-                      slug: 'transicao-de-atividades-e-variacao'
-                  }
-              }
-          ]
+          {
+            "key": "1-1",
+            "label": "JOGO SIMBÓLICO",
+            "slug": "jogo-simbolico"
+          },
+          {
+            "key": "1-2",
+            "label": "ORGANIZAÇÃO DOS BRINQUEDOS E DO AMBIENTE",
+            "slug": "organizacao-dos-brinquedos-e-do-ambiente"
+          },
+          {
+            "key": "1-3",
+            "label": "ESTIMULAÇÃO DA COMUNICAÇÃO",
+            "slug": "estimulaçao-da-comunicacao"
+          },
+          {
+            "key": "1-4",
+            "label": "ENSINO DE IMITAÇÃO",
+            "slug": "ensino-de-imitação"
+          },
+          {
+            "key": "1-5",
+            "label": "TRANSIÇÃO DE ATIVIDADES E VARIAÇÃO",
+            "slug": "transicao-de-atividades-e-variacao"
+          }
+        ]
       },
       {
-          key: '2',
-          data: {
-              name: 'HABILIDADES DE MOTRICIDADE',
-              slug: ''
+        "key": "2",
+        "label": "HABILIDADES DE MOTRICIDADE",
+        "slug": "",
+        "children": [
+          {
+            "key": "2-0",
+            "label": "CIRCUITOS PSICOMOTORES",
+            "slug": "circuitos-psicomotores"
           },
-          children: [
-              {
-                  key: '2-0',
-                  data: {
-                      name: 'CIRCUITOS PSICOMOTORES',
-                      slug: 'circuitos-psicomotores'
-                  }
-              },
-              {
-                  key: '2-1',
-                  data: {
-                      name: 'ATIVIDADES COM ALINHAVO',
-                      slug: 'atividades-com-alinhavo'
-                  }
-              },
-              {
-                  key: '2-2',
-                  data: {
-                      name: 'ATIVIDADES COM MASSINHA',
-                      slug: 'atividades-com-massinha'
-                  }
-              },
-              {
-                  key: '2-3',
-                  data: {
-                      name: 'ATIVIDADES COM SLIME',
-                      slug: 'atividades-com-slime'
-                  }
-              },
-              {
-                  key: '2-4',
-                  data: {
-                      name: 'ATIVIDADES COM BLOCOS DE LEGO',
-                      slug: 'atividades-com-blocos-de-lego'
-                  }
-              },
-              {
-                  key: '2-5',
-                  data: {
-                      name: 'ATIVIDADES COM ENCAIXE',
-                      slug: 'atividades-com-encaixe'
-                  }
-              },
-              {
-                  key: '2-6',
-                  data: {
-                      name: 'ATIVIDADES COM QUEBRA-CABEÇA',
-                      slug: 'atividades-com-quebra-cabeca'
-                  }
-              },
-              {
-                  key: '2-7',
-                  data: {
-                      name: 'ATIVIDADES COM FRUTAS REC-REC',
-                      slug: 'atividades-com-frutas-rec-rec'
-                  }
-              },
-              {
-                  key: '2-8',
-                  data: {
-                      name: 'ATIVIDADES COM PARAFUSOS LÚDICOS',
-                      slug: 'atividades-com-parafusos-ludicos'
-                  }
-              },
-              {
-                  key: '2-9',
-                  data: {
-                      name: 'ATIVIDADES COM BOLA E BOLICHE',
-                      slug: 'atividades-com-bola-e-boliche'
-                  }
-              },
-              {
-                  key: '2-10',
-                  data: {
-                      name: 'ATIVIDADES DE PESCARIA',
-                      slug: 'atividades-de-pescaria'
-                  }
-              },
-              {
-                  key: '2-11',
-                  data: {
-                      name: 'ATIVIDADES NO ESPELHO',
-                      slug: 'atividades-no-espelho'
-                  }
-              }
-          ]
+          {
+            "key": "2-1",
+            "label": "ATIVIDADES COM ALINHAVO",
+            "slug": "atividades-com-alinhavo"
+          },
+          {
+            "key": "2-2",
+            "label": "ATIVIDADES COM MASSINHA",
+            "slug": "atividades-com-massinha"
+          },
+          {
+            "key": "2-3",
+            "label": "ATIVIDADES COM SLIME",
+            "slug": "atividades-com-slime"
+          },
+          {
+            "key": "2-4",
+            "label": "ATIVIDADES COM BLOCOS DE LEGO",
+            "slug": "atividades-com-blocos-de-lego"
+          },
+          {
+            "key": "2-5",
+            "label": "ATIVIDADES COM ENCAIXE",
+            "slug": "atividades-com-encaixe"
+          },
+          {
+            "key": "2-6",
+            "label": "ATIVIDADES COM QUEBRA-CABEÇA",
+            "slug": "atividades-com-quebra-cabeca"
+          },
+          {
+            "key": "2-7",
+            "label": "ATIVIDADES COM FRUTAS REC-REC",
+            "slug": "atividades-com-frutas-rec-rec"
+          },
+          {
+            "key": "2-8",
+            "label": "ATIVIDADES COM PARAFUSOS LÚDICOS",
+            "slug": "atividades-com-parafusos-ludicos"
+          },
+          {
+            "key": "2-9",
+            "label": "ATIVIDADES COM BOLA E BOLICHE",
+            "slug": "atividades-com-bola-e-boliche"
+          },
+          {
+            "key": "2-10",
+            "label": "ATIVIDADES DE PESCARIA",
+            "slug": "atividades-de-pescaria"
+          },
+          {
+            "key": "2-11",
+            "label": "ATIVIDADES NO ESPELHO",
+            "slug": "atividades-no-espelho"
+          }
+        ]
       }
-  ]
+    ]
+    
   
   },
 

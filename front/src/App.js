@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { PrimeReactProvider } from 'primereact/api';
 import Atividade from './pages/atividade.js';
 import Login from './pages/login.js';
+import Footer from './components/footer.js';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/atividades/:slug" element={<Atividade />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </PrimeReactProvider>
   );

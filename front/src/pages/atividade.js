@@ -5,7 +5,10 @@ import { atividade } from "../mocks/atividades";
 const Atividade = () => {
 
   const { slug } = useParams();
-  const activity = atividade.find(activity => activity.slug === slug);
+  const activity = atividade
+                            .map(categoria => categoria.items)
+                            .flat()
+                            .find(item => item.slug === slug)
   console.log(slug)
   console.log(activity)
 
