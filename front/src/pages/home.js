@@ -1,16 +1,13 @@
 import "../styles/App.scss";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import React, { useRef, useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { Button } from 'primereact/button';
-import { Column } from 'primereact/column';
 import { atividade, treeTableAtv } from "../mocks/atividades";
 import { sequencia, sequencia2 } from "../mocks/sequencia";
-import { TreeTable } from 'primereact/treetable';
-import { OverlayPanel } from 'primereact/overlaypanel';
 import { MultiSelect } from "primereact/multiselect";
 import Banner from "../components/banner";
 import { Tooltip } from 'primereact/tooltip';
@@ -69,6 +66,18 @@ function Home() {
     }
   };
 
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
 
   return (
     <>
@@ -112,9 +121,10 @@ function Home() {
 
 
         <AccordionTab header={accordionHeader('Intervenções')}>
-            <Tree value={dataAtividades} className="tabela-de-atividades" selectionMode="single" onSelect={onRowSelect} showHeader={false} />
+            <Tree  value={dataAtividades} className="tabela-de-atividades" selectionMode="single" onSelect={onRowSelect} showHeader={false} />
             
         </AccordionTab>
+            <h1 id="section"></h1>
       </Accordion>
 
       <Banner img={midbanner} title="MONTE SUA AGENDA DE ATIVIDADES"/>
@@ -181,7 +191,6 @@ function Home() {
           </div>
         </TabPanel>
       </TabView>
-
     </>
   );
 }
