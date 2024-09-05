@@ -21,7 +21,7 @@ const Login = () => {
         }
     };
 
-    const items = [{label: 'Login', url: `/login` }];
+    const items = [{label: !isRegistering ? 'Login' : 'Cadastro', url: `/login` }];
     const home = { icon: 'pi pi-home', url: '/' }
   
 
