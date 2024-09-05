@@ -160,7 +160,7 @@ function Home() {
                   <td>
                     Agenda de Atividades
                     <i className="question pi pi-question-circle" 
-                    data-pr-tooltip ="Para montar sua agenda semanal, clique no ícone de mais (+) ao lado da semana e escolha as atividades que deseja adicionar. Fácil e rápido!"
+                    data-pr-tooltip ="Clique nas atividades que já foram realizadas, e acompanhe sua evolução na barra de progresso. "
                     data-pr-position="left"
                     />
                     <Tooltip target=".question" className="tooltip-question"/>

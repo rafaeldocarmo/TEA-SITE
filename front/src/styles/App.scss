@@ -447,7 +447,7 @@ footer{
             height: 32px;
 
             position: absolute;
-            top: 20px;
+            top: 10px;
             right: 20px;
 
             .p-multiselect-label-container{
@@ -457,7 +457,7 @@ footer{
 
               .p-multiselect-label{
                 padding: 0;
-                font-size: 20px;
+                font-size: 18px;
                 color: #0b77a8;
 
                 &:hover{
@@ -481,6 +481,10 @@ footer{
     }
   }
   
+}
+
+.p-multiselect-panel {
+  max-width: 100%;
 }
 
 .multiselect-atividades{
@@ -532,7 +536,10 @@ footer{
   border: none;
   position: absolute;
   top: 80px;
-  left: 60px;
+
+  ol{
+    padding: 0px;
+  }
 
   ol li a{
     text-decoration: none;

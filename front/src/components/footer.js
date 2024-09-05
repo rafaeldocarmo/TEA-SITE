@@ -9,7 +9,7 @@ const Footer = () => {
         <Container className='header-content'>
         <h1>TEA</h1>
         <div>
-            <Link className='footer-item' to="/">Contato: AAAAAAAAAAA@gmail.com</Link>
+            <Link className='footer-item' to="/">Contato: TEA@gmail.com</Link>
         </div>
         </Container>
     </footer>
