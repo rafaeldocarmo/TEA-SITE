@@ -526,3 +526,20 @@ footer{
     text-decoration: none;
   }
 }
+
+.p-breadcrumb{
+  background: none;
+  border: none;
+  position: absolute;
+  top: 80px;
+  left: 60px;
+
+  ol li a{
+    text-decoration: none;
+    color: #0b77a8;
+
+    span{
+      font-size: 14px;
+    }
+  }
+}

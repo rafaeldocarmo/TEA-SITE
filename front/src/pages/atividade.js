@@ -3,6 +3,8 @@ import React from 'react'
 import { atividade } from "../mocks/atividades";
 import login from '../images/login.png'
 import { Button } from 'primereact/button';
+import { BreadCrumb } from 'primereact/breadcrumb';
+
 
 const Atividade = () => {
 
@@ -13,7 +15,7 @@ const Atividade = () => {
   for (const category of atividade) {
     const item = category.items.find(item => item.slug === slug);
     if (item) {
-      currentCategory = category.name;
+      currentCategory = category;
       currentActivity = item;
       break;
     }
@@ -36,12 +38,17 @@ const Atividade = () => {
     }
   };
 
+  const items = [{label: currentCategory.name, url: `/${currentCategory.slug}` },{ label: currentActivity.nome }];
+  const home = { icon: 'pi pi-home', url: '/' }
+  
+
   if (!currentActivity) {
     return <p>Atividade não encontrada.</p>;
   }
 
   return (
     <div className="activies">
+        <BreadCrumb home={home} model={items}/>
 
         <div className="next-prev-buttons">
           <Button
@@ -56,7 +63,7 @@ const Atividade = () => {
           />
         </div>
 
-        <h2><Link className="current-hability" to='/#section'>{currentCategory}</Link>: {currentActivity.nome}</h2>
+        <h2><Link className="current-hability" to='/#section'>{currentCategory.name}</Link>: {currentActivity.nome}</h2>
 
         <div className="activies-grid">
           <div className="box">

@@ -1,5 +1,6 @@
 export const atividade = [
     { name: "HABILIDADES SOCIAIS",
+      slug: "habilidades-sociais",
       items: [
         {
           id: "01",
@@ -49,6 +50,7 @@ export const atividade = [
       ]
     },
     { name: "HABILIDADES DE COMUNICAÇÃO E LINGUAGEM",
+      slug: "habilidades-de-comunicacao-e-linguagem",
       items: [
         {
           id: "06",
@@ -101,6 +103,7 @@ export const atividade = [
       ]
     },
     { name: 'HABILIDADES DE MOTRICIDADE',
+      slug: "habilidades-motricidade",
       items: [
         {
           id: "12",

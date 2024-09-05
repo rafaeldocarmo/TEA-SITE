@@ -7,6 +7,7 @@ import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import login from '../images/login.png';
 import '../styles/login.scss';
+import { BreadCrumb } from 'primereact/breadcrumb';
 
 const Login = () => {
     const [user, setUser] = useState({});
@@ -20,7 +21,14 @@ const Login = () => {
         }
     };
 
+    const items = [{label: 'Login', url: `/login` }];
+    const home = { icon: 'pi pi-home', url: '/' }
+  
+
     return (
+        <>
+        <BreadCrumb home={home} model={items}/>
+
         <section className='user-form'>
             <div className='form-login'>
                 <h1>{isRegistering ? 'Cadastre-se' : 'Login'}</h1>
@@ -128,6 +136,7 @@ const Login = () => {
                 <img src={login} alt='criança brincando' />
             </div>
         </section>
+        </>
     );
 }
 
