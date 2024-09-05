@@ -11,6 +11,7 @@
         margin: auto 0;
         img{
             max-width: 300px;
+            width: 100%;
         }
     }
   
@@ -23,7 +24,7 @@
     .flex-row{
       display: flex;
       align-items: center;
-      
+      flex-wrap: wrap;
       gap: 16px;
   
       &:first-of-type{
@@ -42,7 +43,7 @@
         }
         .p-radiobutton {
             .p-radiobutton-box{
-                background-color: #c4e5ec;
+                background-color: #ebfafe;
                 border-color: #0b77a8;
             }
             input:checked + .p-radiobutton-box{
@@ -67,7 +68,7 @@
       border: 1px solid #0b77a8;
       border-radius: 20px;
       margin: 10px 0;
-      background-color: #c4e5ec;
+      background-color: #ebfafe;
       width: 285px;
       
       &:focus{
@@ -76,7 +77,7 @@
     }
     .p-float-label:has(input:focus) label, .p-float-label:has(input.p-filled) label{
       top: 0.7rem;
-      background-color: #c4e5ec;
+      background-color: #d4e9ee;
       padding: 2px 8px;
       color: #0b77a8;  
     }
@@ -90,3 +91,68 @@
       margin-top: 20px;
     }
   }
+
+  .custom-password {
+    position: relative;
+    width: 100%; /* Garante que o campo use a largura completa se necessário */
+  }
+
+  .custom-password .p-password-input {
+    padding-right: 2.5rem; /* Cria espaço à direita para o ícone */
+  }
+
+  .custom-password .p-password .p-password-icon {
+    position: absolute;
+    right: 10px; /* Ajusta a posição do ícone à direita */
+    top: 50%; /* Posiciona o ícone verticalmente no centro */
+    transform: translateY(-50%); /* Centraliza o ícone verticalmente */
+  }
+
+
+
+  @media (max-width: 768px) {
+    .user-form {
+        flex-direction: column;
+        gap: 40px;
+
+        .img-div {
+          display: flex;
+          justify-content: center;
+            img {
+                max-width: 50%;
+            }
+        }
+
+        .form-login {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .p-inputtext {
+            width: 100%; 
+        }
+
+        .flex-row {
+            flex-direction: column; 
+        }
+
+        .save-button {
+            width: 100%; 
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .user-form {
+        padding: 20px;
+        gap: 20px;
+
+        .img-div {
+            display: none; 
+        }
+
+        .form-login {
+            width: 100%;
+        }
+    }
+}
