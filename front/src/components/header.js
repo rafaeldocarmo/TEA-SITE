@@ -1,15 +1,31 @@
 import '../styles/App.scss'
-import React from 'react'
+import React, { useRef } from 'react'
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
+import { Button } from 'primereact/button';
+import { Menu } from 'primereact/menu';
 
 
 const Header = (props) => {
-
+  const menuRight = useRef(null);
+  const items = [
+    {
+        label: 'Home',
+        url: '/'
+    },
+    {
+        label: 'Quem Somos',
+        url: '/'
+    },
+    {
+        label: 'Login',
+        url: '/login'
+    },
+  ];
   return (
     <>
       <header>
-          <Container className='header-content'>
+          <Container className='header-content header-desktop'>
             <h1>TEA</h1>
             <div>
               <Link className='header-item' to="/">Home</Link>
@@ -17,37 +33,12 @@ const Header = (props) => {
               <Link className='header-item' to="/login">Login</Link>
             </div>
           </Container>
-      </header>
-      {/* <header className='menu-hamburguer'>
-        {!openMenu && (<div className='menu-hamburguer-button' onClick={() => {setOpenMenu(true)}}></div>)}
-        {openMenu && (<div className='menu-hamburguer-button-close' onClick={() => {setOpenMenu(false)}}></div>)}
-        <Container className={openMenu ? 'menu-hamburguer-content menu-open' : 'menu-hamburguer-content '}>
-            {!isHome && (
-              <>
-              <Link className='header-item' to="/" onClick={() => {setOpenMenu(false)}}>
-                Home
-              </Link>
-              </>
-            )}
-            <Link className='header-item' to="/filmes" onClick={() => {setOpenMenu(false)}}>Filmes</Link>
-            <Link className='header-item' to="/series" onClick={() => {setOpenMenu(false)}}>Séries</Link>
-            <Link className='header-item' to="/livros" onClick={() => {setOpenMenu(false)}}>Livros</Link>
-            <Link className='header-item' to="/avaliacoes" onClick={() => {setOpenMenu(false)}}>Avaliações</Link>
-            <Link className='header-item' to="/membros" onClick={() => {setOpenMenu(false)}}>Membros</Link>
-            {!(userLoggedIn || adminLoggedIn) && (<>
-              <h4 onClick={() => {setOpenMenu(false); props.clickLogin()}}>Login</h4>
-            </>)}
-            {(userLoggedIn) && (<>
-              <Link className='header-item' to={'/usuario/' + userLoggedIn} onClick={() => {setOpenMenu(false)}}>Perfil</Link>
-            </>)}
-            {(adminLoggedIn) && (<>
-              <Link className='header-item' to={'/usuario/' + adminLoggedIn} onClick={() => {setOpenMenu(false)}}>Perfil</Link>
-            </>)}
-            {(userLoggedIn || adminLoggedIn) && (<>
-              <Link className='header-item' onClick={handleGetOut} >Sair</Link>
-            </>)}
+          <Container className='header-content header-mobile'>
+            <h1>TEA</h1>
+            <Menu model={items} popup ref={menuRight} id="popup_menu_right" className='menu-hamb' />
+            <Button icon="pi pi-bars" className="mr-2" unstyled onClick={(event) => menuRight.current.toggle(event)} />
           </Container>
-      </header> */}
+      </header>
     </>
   )
 }

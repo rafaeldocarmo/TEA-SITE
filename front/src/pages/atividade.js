@@ -43,16 +43,20 @@ const Atividade = () => {
   return (
     <div className="activies">
 
-        <Button
-          label="Anterior"
-          onClick={goToPreviousActivity} 
-        />
-        <Button
-          label="Próxima"
-          onClick={goToNextActivity} 
-        />
+        <div className="next-prev-buttons">
+          <Button
+            label="<- Anterior"
+            unstyled
+            onClick={goToPreviousActivity} 
+          />
+          <Button
+            label="Próxima ->"
+            unstyled
+            onClick={goToNextActivity} 
+          />
+        </div>
 
-        <h2><Link to='/#section'>{currentCategory}</Link> - {currentActivity.nome}</h2>
+        <h2><Link className="current-hability" to='/#section'>{currentCategory}</Link>: {currentActivity.nome}</h2>
 
         <div className="activies-grid">
           <div className="box">
@@ -77,9 +81,9 @@ const Atividade = () => {
           </div>}
         </div>
 
-        <div className='img-div'>
+        {/* <div className='img-div'>
             <img src={login} alt='criança brincando' />
-        </div>
+        </div> */}
     </div>
   )
 }

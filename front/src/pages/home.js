@@ -43,11 +43,6 @@ function Home() {
       console.log("data", calcularProgresso(sequenciaEscolhida))
       setSequenciaEscolhidaBack(prepareDataForBackend(sequenciaEscolhida))
   }, [sequenciaEscolhida]);
-  // useEffect(() => {
-  //     console.log("data", parseBackendData(sequenciaEscolhidaBack))
-  // }, [sequenciaEscolhidaBack]);
-
-
 
 
   const accordionHeader = (text) => {
@@ -135,7 +130,7 @@ function Home() {
               <table>
                 <thead>
                   <td>
-                    Agenda de atividades
+                    Agenda de Atividades
                     <i className="question pi pi-question-circle" 
                     data-pr-tooltip ="Para montar sua agenda semanal, clique no ícone de mais (+) ao lado da semana e escolha as atividades que deseja adicionar. Fácil e rápido!"
                     data-pr-position="left"
@@ -163,7 +158,7 @@ function Home() {
               <table>
                 <thead>
                   <td>
-                    Agenda de atividades
+                    Agenda de Atividades
                     <i className="question pi pi-question-circle" 
                     data-pr-tooltip ="Para montar sua agenda semanal, clique no ícone de mais (+) ao lado da semana e escolha as atividades que deseja adicionar. Fácil e rápido!"
                     data-pr-position="left"

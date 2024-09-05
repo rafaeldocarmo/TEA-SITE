@@ -15,11 +15,13 @@ function App() {
       <BrowserRouter>
         <Header />
         <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/atividades/:slug" element={<Atividade />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/atividades/:slug" element={<Atividade />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </main>
         <Footer />
       </BrowserRouter>
     </PrimeReactProvider>
