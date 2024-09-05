@@ -1,10 +1,9 @@
 import React from 'react'
-import React from "react";
 import { MultiSelect } from "primereact/multiselect";
 import { Checkbox } from 'primereact/checkbox';
 
 const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida, pacienteView }) => {
-
+    
     // Seleciona a nova sequencia 
     const selectSequencia = (e) => {
       const selectedValues = e.value;
@@ -57,7 +56,7 @@ const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida,
     };
   
     const atividadesDaSemana = sequenciaEscolhida.find(item => item[data.semana]);
-  
+
     return (
       <tr key={data.semana}>
         <td>
@@ -87,8 +86,9 @@ const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida,
               ))}
             </div>
             {!pacienteView && <>
+                {console.log(atividadesDaSemana?.[data.semana][0])}
                 <MultiSelect 
-                  value={atividadesDaSemana?.[data.semana]?.map(item => item.value) || []}
+                  value={atividadesDaSemana?.[data.semana]?.map(item => item.value) || ''}
                   options={atividade} 
                   optionLabel="nome" 
                   optionValue="slug"

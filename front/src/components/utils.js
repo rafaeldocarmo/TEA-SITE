@@ -20,15 +20,17 @@ export function transformData(input) {
     for (let i = 1; i <= 8; i++) {
         const weekKey = `week_${i}`;
         if (input[weekKey]) {
-            // Extrai o nome e o status do texto
             const [nome, isCheckStr] = input[weekKey].split('(');
             const isCheck = isCheckStr && isCheckStr.replace(')', '').trim() === 'true';
             
-            // Adiciona ao resultado
+            const formattedNome = nome.trim();
+            const formattedValue = formattedNome.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]/g, '');
+
             result.push({
                 [`Semana ${i}`]: [
                     {
-                        nome: nome.trim(),
+                        nome: formattedNome,
+                        value: formattedValue,
                         isCheck: isCheck
                     }
                 ]
