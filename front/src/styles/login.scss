@@ -1,6 +1,6 @@
 .user-form{
     padding: 30px;
-    margin: 50px auto;
+    margin: 0px auto;
     color: #0b77a8;  
     display: flex;
     justify-content: center;
@@ -10,7 +10,7 @@
     .img-div{
         margin: auto 0;
         img{
-            max-width: 300px;
+            max-width: 250px;
             width: 100%;
         }
     }
@@ -31,6 +31,11 @@
         margin-bottom: 10px;
       }
 
+      p-breadcrumb p-component{
+        display: flex;
+        padding-left: 20px;
+        padding-top: 10px;
+      }
   
       p{
         margin: 0;
@@ -94,18 +99,18 @@
 
   .custom-password {
     position: relative;
-    width: 100%; /* Garante que o campo use a largura completa se necessário */
+    width: 100%; 
   }
 
   .custom-password .p-password-input {
-    padding-right: 2.5rem; /* Cria espaço à direita para o ícone */
+    padding-right: 2.5rem; 
   }
 
   .custom-password .p-password .p-password-icon {
     position: absolute;
-    right: 10px; /* Ajusta a posição do ícone à direita */
-    top: 50%; /* Posiciona o ícone verticalmente no centro */
-    transform: translateY(-50%); /* Centraliza o ícone verticalmente */
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
   }
 
 
@@ -113,31 +118,20 @@
   @media (max-width: 768px) {
     .user-form {
         flex-direction: column;
-        gap: 40px;
-
-        .img-div {
-          display: flex;
-          justify-content: center;
-            img {
-                max-width: 50%;
-            }
-        }
 
         .form-login {
-            width: 100%;
-            padding: 20px;
-        }
-
-        .p-inputtext {
-            width: 100%; 
+            padding: 15px;
         }
 
         .flex-row {
             flex-direction: column; 
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .save-button {
-            width: 100%; 
+          width: 80%;
         }
     }
 }
@@ -145,10 +139,10 @@
 @media (max-width: 480px) {
     .user-form {
         padding: 20px;
-        gap: 20px;
+        gap: 0px;
 
         .img-div {
-            display: none; 
+            margin-top: 30px;
         }
 
         .form-login {

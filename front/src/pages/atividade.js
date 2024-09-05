@@ -1,7 +1,7 @@
+import "../styles/atividades.scss"
 import { useParams, useNavigate, Link } from "react-router-dom";
 import React from 'react'
 import { atividade } from "../mocks/atividades";
-import login from '../images/login.png'
 import { Button } from 'primereact/button';
 import { BreadCrumb } from 'primereact/breadcrumb';
 

@@ -27,8 +27,7 @@ const Login = () => {
 
     return (
         <>
-        <BreadCrumb home={home} model={items}/>
-
+        <BreadCrumb className='user-form' home={home} model={items}/>
         <section className='user-form'>
             <div className='form-login'>
                 <h1>{isRegistering ? 'Cadastre-se' : 'Login'}</h1>
@@ -40,6 +39,8 @@ const Login = () => {
                                 <InputText id="Email" type='email' onChange={(e) => setUser({...user, email: e.target.value})}/>
                                 <label htmlFor="Email">Email</label>
                             </FloatLabel>
+                        </div>
+                        <div className='flex-row'>
                             <FloatLabel>
                                 <InputText id='password' type='password' onChange={(e) => setUser({...user, senha: e.target.value})}/>
                                 <label htmlFor="password">Senha</label>
@@ -73,16 +74,7 @@ const Login = () => {
                                 <label htmlFor="tel">Telefone</label>
                             </FloatLabel>
                         </div>
-                        <div className='flex-row'>
-                            <FloatLabel>
-                                <InputText id="Email" type='email' onChange={(e) => setUser({...user, email: e.target.value})}/>
-                                <label htmlFor="Email">Email</label>
-                            </FloatLabel>
-                            <FloatLabel>
-                                <InputText id='password' type='password' onChange={(e) => setUser({...user, senha: e.target.value})}/>
-                                <label htmlFor="password">Senha</label>
-                            </FloatLabel>
-                        </div>
+                        
                         <div className='flex-row'>
                             <FloatLabel>
                                 <InputText id='nome-da-crianca' onChange={(e) => setUser({...user, children_name: e.target.value})}/>
@@ -105,14 +97,29 @@ const Login = () => {
                                 <InputText id="Idade" type='number' onChange={(e) => setUser({...user, idade: e.target.value})}/>
                                 <label htmlFor="Idade">Idade</label>
                             </FloatLabel>
+                        </div>
+                        <div className='flex-row'>
                             <FloatLabel>
                                 <InputMask id="data_de_nascimento" type='text' onChange={(e) => setUser({...user, data_de_nascimento: e.value})} mask="99/99/9999"/>
                                 <label htmlFor="data_de_nascimento">Data de Nascimento</label>
                             </FloatLabel>
                         </div>
+                        <div className='flex-row'>
+                            <FloatLabel>
+                                <InputText id="Email" type='email' onChange={(e) => setUser({...user, email: e.target.value})}/>
+                                <label htmlFor="Email">Email</label>
+                            </FloatLabel>
+                        </div>
+                        <div className='flex-row'>
+                            <FloatLabel>
+                                <InputText id='password' type='password' onChange={(e) => setUser({...user, senha: e.target.value})}/>
+                                <label htmlFor="password">Senha</label>
+                            </FloatLabel>
+                        </div>
                     </>
                 )}
 
+                <div className='flex-row'>
                 <p>
                     {isRegistering ? (
                         <>
@@ -124,16 +131,17 @@ const Login = () => {
                         </>
                     )}
                 </p>
-
                 <Button 
                     label={isRegistering ? 'Cadastrar' : 'Entrar'}
                     className='save-button'
                     onClick={OnSave}
                 />
+                </div>
             </div>
-
+            <div className='flex-row'>
             <div className='img-div'>
                 <img src={login} alt='criança brincando' />
+            </div>
             </div>
         </section>
         </>

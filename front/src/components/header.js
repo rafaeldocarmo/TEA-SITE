@@ -1,4 +1,4 @@
-import '../styles/App.scss'
+import '../styles/main.scss'
 import React, { useRef } from 'react'
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';

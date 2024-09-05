@@ -1,7 +1,8 @@
+import '../styles/agenda.scss'
 import React, { useState, useEffect } from "react";
 import { Button } from 'primereact/button';
 import { atividade } from "../mocks/atividades";
-import { sequencia, sequencia2 } from "../mocks/sequencia";
+import { sequencia2 } from "../mocks/sequencia";
 import { Tooltip } from 'primereact/tooltip';
 import { ProgressBar } from 'primereact/progressbar';
 import { prepareDataForBackend, transformData, calcularProgresso } from '../components/utils'
@@ -9,13 +10,8 @@ import SemanaRow from "../components/semanaRow";
 
 const Agenda = () => {
 
-    const [dataSequencia, setDataSequencia] = useState([])
     const [sequenciaEscolhidaBack, setSequenciaEscolhidaBack] = useState([]);
     const [userType, setUserType] = useState('terapeuta');
-  
-    useEffect(() => {
-        sequencia.getTreeTableNodes().then((data) => setDataSequencia(data));
-    }, []);
     
     const onSaveSequencia = async () => {
       const userId = 2;
@@ -73,7 +69,7 @@ const Agenda = () => {
                     userType === 'Terapeuta' ?
                     "Para montar sua agenda semanal, clique no ícone de mais (+) ao lado da semana e escolha as atividades que deseja adicionar. Fácil e rápido!"
                     :
-                    "Para montar sua agenda semanal, clique no ícone de mais (+) ao lado da semana e escolha as atividades que deseja adicionar. Fácil e rápido!"
+                    "Clique nas atividades que já foram realizadas, e acompanhe sua evolução na barra de progresso."
                   }
                   data-pr-position="left"
                 />
