@@ -2,9 +2,6 @@ import "../styles/App.scss";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Accordion, AccordionTab } from "primereact/accordion";
-import { Stepper } from 'primereact/stepper';
-import { StepperPanel } from 'primereact/stepperpanel';
 import { Button } from 'primereact/button';
 import { atividade, treeTableAtv } from "../mocks/atividades";
 import { sequencia, sequencia2 } from "../mocks/sequencia";
@@ -16,50 +13,19 @@ import midbanner from '../images/mid-banner.png'
 import { Checkbox } from 'primereact/checkbox';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { ProgressBar } from 'primereact/progressbar';
-import { Tree } from 'primereact/tree';
-        
-
-        
-
-        
-
+import Accordions from "../components/accordions";        
 
 function Home() {
-  const stepperRef = useRef(null);
-  const navigate = useNavigate();
 
   const [dataSequencia, setDataSequencia] = useState([])
-  const [dataAtividades, setDataAtividades] = useState([])
   const [sequenciaEscolhida, setSequenciaEscolhida] = useState([]);
   const [sequenciaEscolhidaBack, setSequenciaEscolhidaBack] = useState([]);
 
-
   useEffect(() => {
       sequencia.getTreeTableNodes().then((data) => setDataSequencia(data));
-      treeTableAtv.getTreeAtividade().then((data) => setDataAtividades(data));
   }, []);
 
-  useEffect(() => {
-      console.log("data", calcularProgresso(sequenciaEscolhida))
-      setSequenciaEscolhidaBack(prepareDataForBackend(sequenciaEscolhida))
-  }, [sequenciaEscolhida]);
 
-
-  const accordionHeader = (text) => {
-    return(
-      <>
-        <i className="pi pi-comments"></i>
-        <p>{text}</p>
-        <i className="pi pi-angle-down"></i>
-      </>
-    )
-  }
-  const onRowSelect = (e) => {
-    const selectedAtividade = e.node;
-    if(selectedAtividade.slug !== ''){
-      navigate(`/atividades/${selectedAtividade.slug}`);
-    }
-  };
 
   const location = useLocation();
 
@@ -72,55 +38,53 @@ function Home() {
       }
     }
   }, [location]);
+  
+  const onSaveSequencia = async () => {
+    const userId = 2;
+    try {
+        const response = await fetch('http://localhost:8800/api/cronograma', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: userId,
+                ...prepareDataForBackend(sequenciaEscolhida)
+            })
+          });
+          fetchSchedules();
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Cronograma enviado com sucesso:', data);
+        } else {
+            console.error('Erro ao enviar cronograma:', response.status);
+        }
+    } catch (error) {
+        console.error('Erro ao enviar cronograma:', error);
+    }
+  };
+
+  const fetchSchedules = async () => {
+    try {
+        const response = await fetch(`http://localhost:8800/api/cronograma/2`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setSequenciaEscolhidaBack(transformData(data[0]));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
 
   return (
     <>
       <Banner img={banner} title="APRENDENDO A ESTIMULAR A CRIANÇA COM TEA"/>
 
-
-      <Accordion collapseIcon expandIcon className="home-accordion">
-        <AccordionTab header={accordionHeader('Conversando sobre TEA')}>
-          <p className="m-0">
-            O Transtorno do Espectro Autista (TEA) é um transtorno do neurodesenvolvimento, caracterizado pelas dificuldades de comunicação e interação social e também comportamentos restritos e repetitivos. 
-            <br /><br />
-            Para um melhor prognóstico, é essencial que a criança com TEA seja estimulada precocemente.
-            <br /><br />
-            Esse App se destina a pais e cuidadores com objetivo de orientar e apresentar um Protocolo de Estimulação para crianças com TEA desenvolvido e apresentado no Programa de Pós Graduação Scritu Sensu em Distúrbios do Desenvolvimento.    
-          </p>
-        </AccordionTab>
-
-
-        <AccordionTab header={accordionHeader('Orientações')}>
-          <Stepper ref={stepperRef} style={{ flexBasis: '10rem' }} className="home-stepper">
-            <StepperPanel >
-              <p>Este é um App destinado a pais e terapeutas e contém 1 Protocolo  de Estimulação Psicomotora para criança com TEA a fim de estimular o desenvolvimento psicomotor. </p>
-              <Button label="Próximo" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
-            </StepperPanel>
-            <StepperPanel>
-              <p>As atividades estão organizadas em uma  lista, e você poderá escolher a sequencia a ser realizada ou seguir uma sugestão do App.</p>
-              <Button label="Prévio" icon="pi pi-arrow-left" iconPos="left" onClick={() => stepperRef.current.prevCallback()} />
-              <Button label="Próximo" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
-            </StepperPanel>
-            <StepperPanel>
-              <p>Antes de iniciar as atividades, organize o material e o ambiente previamente.</p>
-              <Button label="Prévio" icon="pi pi-arrow-left" iconPos="left" onClick={() => stepperRef.current.prevCallback()} />
-              <Button label="Próximo" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
-            </StepperPanel>
-            <StepperPanel>
-              <p>Após a preparação do ambiente, inicie as atividades e não esqueça de se divertir com seu filho. </p>
-              <Button label="Prévio" icon="pi pi-arrow-left" iconPos="left" onClick={() => stepperRef.current.prevCallback()} />
-            </StepperPanel>
-          </Stepper>
-        </AccordionTab>
-
-
-        <AccordionTab header={accordionHeader('Intervenções')}>
-            <Tree  value={dataAtividades} className="tabela-de-atividades" selectionMode="single" onSelect={onRowSelect} showHeader={false} />
-            
-        </AccordionTab>
-            <h1 id="section"></h1>
-      </Accordion>
+      <Accordions />
 
       <Banner img={midbanner} title="MONTE SUA AGENDA DE ATIVIDADES"/>
 
@@ -150,6 +114,10 @@ function Home() {
                         );
                     })}
                 </tbody>
+                <Button 
+                  label="Salvar Cronograma"
+                  onClick={onSaveSequencia}
+                />
               </table>
           </div>
         </TabPanel>
@@ -172,8 +140,8 @@ function Home() {
                             <SemanaRow 
                               data={data} 
                               atividade={atividade}
-                              sequenciaEscolhida={sequenciaEscolhida}
-                              setSequenciaEscolhida={setSequenciaEscolhida}
+                              sequenciaEscolhida={sequenciaEscolhidaBack}
+                              setSequenciaEscolhida={setSequenciaEscolhidaBack}
                               pacienteView
                             />
                         );
@@ -181,7 +149,7 @@ function Home() {
                 </tbody>
               </table>
               
-              <ProgressBar value={calcularProgresso(sequenciaEscolhida)}></ProgressBar>
+              <ProgressBar value={calcularProgresso(sequenciaEscolhidaBack)}></ProgressBar>
 
           </div>
         </TabPanel>
@@ -259,7 +227,7 @@ const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida,
                       className="checkbox-progress" 
                       inputId={`checkbox-${data.semana}-${index}`}
                     />
-                    <label htmlFor={`checkbox-${data.semana}-${index}`} key={index} className={item.isCheck && 'check'}>
+                    <label htmlFor={`checkbox-${data.semana}-${index}`} key={index} className={item.isCheck ? 'check' : ''}>
                       {item.nome}
                     </label>
                   </> 
@@ -313,25 +281,31 @@ const prepareDataForBackend = (sequenciaEscolhida) => {
   return backendData;
 };
 
-const parseBackendData = (backendData) => {
-  const sequenciaEscolhida = [];
+function transformData(input) {
+  const result = [];
 
-  Object.entries(backendData).forEach(([weekKey, atividadesStr]) => {
-    const semana = `Semana ${weekKey.split('_')[1]}`;
-    const atividades = atividadesStr.split(', ').map(atividadeStr => {
-      const [nome, isCheck] = atividadeStr.match(/(.+)\((true|false)\)/).slice(1, 3);
-      return {
-        nome,
-        value: nome.toLowerCase().replace(/\s+/g, '-'), // Assumindo que o value é o slug do nome
-        isCheck: isCheck === 'true'
-      };
-    });
+  for (let i = 1; i <= 8; i++) {
+      const weekKey = `week_${i}`;
+      if (input[weekKey]) {
+          // Extrai o nome e o status do texto
+          const [nome, isCheckStr] = input[weekKey].split('(');
+          const isCheck = isCheckStr && isCheckStr.replace(')', '').trim() === 'true';
+          
+          // Adiciona ao resultado
+          result.push({
+              [`Semana ${i}`]: [
+                  {
+                      nome: nome.trim(),
+                      isCheck: isCheck
+                  }
+              ]
+          });
+      }
+  }
 
-    sequenciaEscolhida.push({ [semana]: atividades });
-  });
+  return result;
+}
 
-  return sequenciaEscolhida;
-};
 
 const calcularProgresso = (sequenciaEscolhida) => {
   let totalAtividades = 0;
