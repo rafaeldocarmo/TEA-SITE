@@ -15,8 +15,8 @@ const Header = (props) => {
         url: '/'
     },
     {
-        label: 'Quem Somos',
-        url: '/'
+      label: 'Quem Somos',
+      url: '/'
     },
     {
         label: 'Login',
@@ -30,7 +30,7 @@ const Header = (props) => {
             <h1>TEA</h1>
             <div>
               <Link className='header-item' to="/">Home</Link>
-              <Link className='header-item' to="/">Quem Somos</Link>
+              <a className='header-item' href="#quemsomos">Quem Somos</a>
               <Link className='header-item' to="/login">Login</Link>
             </div>
           </Container>
