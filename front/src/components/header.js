@@ -16,8 +16,8 @@ const Header = (props) => {
         url: '/'
     },
     {
-        label: 'Quem Somos',
-        url: '/'
+      label: 'Quem Somos',
+      url: '/'
     },
     {
         label: 'Login',
@@ -33,7 +33,6 @@ const Header = (props) => {
               <Link className='header-item' to="/">Home</Link>
               <Link className='header-item' to="/">Quem Somos</Link>
               {isLogged ? <Link className='header-item' to="/perfil">Perfil</Link> : <Link className='header-item' to="/login">Login</Link>}
-              
             </div>
           </Container>
           <Container className='header-content header-mobile'>

@@ -6,6 +6,7 @@ import banner from '../images/banner.png'
 import midbanner from '../images/mid-banner.png'
 import Accordions from "../components/accordions";
 import Agenda from "../components/agenda";
+import QuemSomos from "../components/quemsomos";
 
 function Home() {
 
@@ -15,17 +16,15 @@ function Home() {
 
       <Accordions />
 
+      <div id="quemsomos">
+        <QuemSomos />
+      </div>
+
       <Banner img={midbanner} title="MONTE SUA AGENDA DE ATIVIDADES"/>
 
       <Agenda />
     </>
   );
 }
-
-
-
-
-
-
 
 export default Home;
