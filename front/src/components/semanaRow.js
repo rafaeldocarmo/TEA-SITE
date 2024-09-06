@@ -64,7 +64,7 @@ const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida,
             <p>{data.semana}</p>
             <div className="atividades-escolhidas">
               {atividadesDaSemana && atividadesDaSemana[data.semana]?.map((item, index) => (
-                <>
+                <React.Fragment key={`${data.semana}-${index}`}>
                   {pacienteView ? (
                     <> 
                       <Checkbox 
@@ -82,11 +82,10 @@ const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida,
                         {item.nome}
                     </label>
                   )}
-                </>
+                </React.Fragment>
               ))}
             </div>
             {!pacienteView && <>
-                {console.log(atividadesDaSemana?.[data.semana][0])}
                 <MultiSelect 
                   value={atividadesDaSemana?.[data.semana]?.map(item => item.value) || ''}
                   options={atividade} 

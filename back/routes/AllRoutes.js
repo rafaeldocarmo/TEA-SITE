@@ -1,5 +1,5 @@
 import  express  from "express";
-import { addSchedule, getSchedules } from "../controllers/cronograma.js";
+import { addSchedule, editSchedule, getSchedules } from "../controllers/cronograma.js";
 
 
 const router = express.Router()
@@ -7,6 +7,7 @@ const router = express.Router()
 router
     .route('/api/cronograma')
     .post(addSchedule)
+    .put(editSchedule)
 
 router
     .route('/api/cronograma/:id')

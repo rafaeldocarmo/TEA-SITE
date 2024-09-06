@@ -20,20 +20,26 @@ export function transformData(input) {
     for (let i = 1; i <= 8; i++) {
         const weekKey = `week_${i}`;
         if (input[weekKey]) {
-            const [nome, isCheckStr] = input[weekKey].split('(');
-            const isCheck = isCheckStr && isCheckStr.replace(')', '').trim() === 'true';
+            // Divide as atividades por semana usando a vírgula como delimitador
+            const activities = input[weekKey].split(',').map(activity => activity.trim());
             
-            const formattedNome = nome.trim();
-            const formattedValue = formattedNome.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]/g, '');
+            const formattedActivities = activities.map(activity => {
+                const [nome, isCheckStr] = activity.split('(');
+                const isCheck = isCheckStr && isCheckStr.replace(')', '').trim() === 'true';
+                
+                const formattedNome = nome.trim();
+                const formattedValue = formattedNome.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]/g, '');
 
+                return {
+                    nome: formattedNome,
+                    value: formattedValue,
+                    isCheck: isCheck
+                };
+            });
+
+            // Adiciona ao resultado
             result.push({
-                [`Semana ${i}`]: [
-                    {
-                        nome: formattedNome,
-                        value: formattedValue,
-                        isCheck: isCheck
-                    }
-                ]
+                [`Semana ${i}`]: formattedActivities
             });
         }
     }

@@ -11,7 +11,23 @@ export const addSchedule = async (req, res) => {
             return res.status(500).json(error);
         }
 
-        return res.status(200).json('Avaliacao adicionado com sucesso!');
+        return res.status(200).json('Agenda adicionada com sucesso!');
+    })
+
+}
+
+export const editSchedule = async (req, res) => {
+    const {  week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8, user_id, id } = req.body;
+
+    const q = "UPDATE schedules SET `user_id` = ? , `week_1` = ?, `week_2` = ?, `week_3` = ?, `week_4` = ?, `week_5` = ?, `week_6` = ?, `week_7` = ?, `week_8` = ? WHERE `id` = ?;"
+
+    db.query(q, [user_id, week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8, id], (error) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).json(error);
+        }
+
+        return res.status(200).json('Agenda editada com sucesso!');
     })
 
 }
