@@ -1,5 +1,5 @@
 import '../styles/main.scss'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
@@ -9,6 +9,7 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 
 const Header = (props) => {
   const menuRight = useRef(null);
+  const [isLogged, setIsLogged] = useState(true)
   const items = [
     {
         label: 'Home',
@@ -31,7 +32,8 @@ const Header = (props) => {
             <div>
               <Link className='header-item' to="/">Home</Link>
               <Link className='header-item' to="/">Quem Somos</Link>
-              <Link className='header-item' to="/login">Login</Link>
+              {isLogged ? <Link className='header-item' to="/perfil">Perfil</Link> : <Link className='header-item' to="/login">Login</Link>}
+              
             </div>
           </Container>
           <Container className='header-content header-mobile'>

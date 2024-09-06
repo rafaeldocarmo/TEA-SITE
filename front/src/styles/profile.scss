@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap');
+
+.profile-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 85%;
+    max-width: 800px;
+    background-color: #0b77a8;
+    padding: 50px;
+    position: relative;
+    min-height: 360px;
+
+    &-content{
+        display: flex;
+        align-items: center;
+        gap: 50px;
+
+        img{
+            max-width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+        h1{
+            font-family: "Edu AU VIC WA NT Hand", cursive;
+            color: #c4e5ec;
+        }
+        h5{
+            font-size: 16px;
+            color: #c4e5ec;
+        }
+
+        .p-inputtext, .p-dropdown{
+            background: none;
+            border: none;
+            border-bottom: #c4e5ec 1px solid;
+            color: #c4e5ec;
+
+            width: 45%;
+            margin: 10px;
+
+            .p-inputtext{
+                width: unset;
+                border: none;
+            }
+
+            &::placeholder{
+                color: #c4e5ec;
+            }
+            &:focus{
+                box-shadow: none;
+
+            }
+        }
+        .p-dropdown{
+            width: 100%;
+
+            &.p-focus{
+                box-shadow: none;
+            }
+        }
+    }
+
+    .selectTab{
+        position: absolute;
+        width: 50px;
+        left: -48px;
+
+        button{
+            background: #0b77a8;
+            border: none;
+            &:focus{
+                box-shadow: none;
+            }
+            &.check{
+                background-color: white;
+                color: #0b77a8;
+            }
+        }
+    }
+    button.edit{
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+
+        background-color: white;
+        color: #0b77a8;
+        border: none;
+    }
+}
