@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import { db } from '../db.js'
-// import { secretKey } from '../jwtConfig.js'
-
 const secretKey = process.env.SECRET_KEY; 
 
 export const authController = {
@@ -54,19 +52,20 @@ export const authController = {
         })
     },
 
-    verifyToken: (req, res, next) => {
-        const token = req.headers["x-access-token"]
-        if (!token) return res.status(403).send({ message: "Nenhum token fornecido!" })
-
-        jwt.verify(token, secretKey, (err, decoded) => {
-            if (err) return res.status(500).send({ message: "Falha na autenticação do token." })
-
-            req.userId = decoded.id
-            next()
-        })
-    },
-
-    protected: (req, res) => {
-        res.status(200).send({ message: `Você acessou uma rota protegida com sucesso!` })
+   verifyToken:  (req, res, next) => {
+        const token = req.headers['authorization'];
+    
+        if (!token) return res.status(403).send({ message: "Nenhum token fornecido!" });
+            
+        const tokenWithoutBearer = token.split(' ')[1];
+    
+        jwt.verify(tokenWithoutBearer, secretKey, (err, decoded) => {
+            if (err) {
+                return res.status(500).send({ message: "Falha na autenticação do token." });
+            }
+    
+            req.userId = decoded.id;
+            next();
+        });
     }
 }
