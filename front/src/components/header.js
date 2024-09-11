@@ -1,15 +1,16 @@
 import '../styles/main.scss'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
-import { BreadCrumb } from 'primereact/breadcrumb';
-
+import { HashLink } from 'react-router-hash-link';
+import { AuthContext } from '../context/authProvider';
 
 const Header = (props) => {
   const menuRight = useRef(null);
-  const [isLogged, setIsLogged] = useState(true)
+  const { isAuthenticated } = useContext(AuthContext);
+
   const items = [
     {
         label: 'Home',
@@ -20,10 +21,11 @@ const Header = (props) => {
       url: '/'
     },
     {
-        label: 'Login',
-        url: '/login'
+      label: 'Login',
+      url: '/login'
     },
   ];
+
   return (
     <>
       <header>
@@ -31,8 +33,8 @@ const Header = (props) => {
             <h1>TEA</h1>
             <div>
               <Link className='header-item' to="/">Home</Link>
-              <Link className='header-item' to="/">Quem Somos</Link>
-              {isLogged ? <Link className='header-item' to="/perfil">Perfil</Link> : <Link className='header-item' to="/login">Login</Link>}
+              <HashLink to="/#quemsomos" className='header-item' scroll={(el) => el.scrollIntoView({ behavior: 'auto', block: 'center' })}>Quem Somos</HashLink>
+              {isAuthenticated ? <Link className='header-item' to="/perfil">Perfil</Link> : <Link className='header-item' to="/login">Login</Link>}
             </div>
           </Container>
           <Container className='header-content header-mobile'>

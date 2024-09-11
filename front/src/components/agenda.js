@@ -1,5 +1,6 @@
 import '../styles/agenda.scss'
-import React, { useState, useEffect } from "react";
+import '../styles/App.scss'
+import React, { useState, useEffect, useContext } from "react";
 import { Button } from 'primereact/button';
 import { atividade } from "../mocks/atividades";
 import { sequencia2 } from "../mocks/sequencia";
@@ -7,26 +8,27 @@ import { Tooltip } from 'primereact/tooltip';
 import { ProgressBar } from 'primereact/progressbar';
 import { prepareDataForBackend, transformData, calcularProgresso } from '../components/utils'
 import SemanaRow from "../components/semanaRow";
+import { AuthContext } from "../context/authProvider.js"
+import { Link } from 'react-router-dom';
 
 const Agenda = () => {
 
     const [sequenciaEscolhidaBack, setSequenciaEscolhidaBack] = useState([]);
-    const [userType, setUserType] = useState('');
     const [isEdit, setIsEdit] = useState(false);
     const [cronoId, setCronoId] = useState(false);
-    
+    const { isAuthenticated, user, token } = useContext(AuthContext);
     
     const onSaveSequencia = async () => {
-      const userId = 2;
       try {
-          const response = await fetch('http://localhost:8800/api/cronograma', {
+          const response = await fetch(`http://localhost:8800/api/cronograma/`, {
               method: isEdit ? 'PUT' : 'POST',
               headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
               },
               body: JSON.stringify({
                 ...prepareDataForBackend(sequenciaEscolhidaBack),
-                user_id: userId,
+                user_id: user.id,
                 id: cronoId
               })
             });
@@ -43,8 +45,15 @@ const Agenda = () => {
     };
   
     const fetchSchedules = async () => {
+      const endpoint = user?.user_type_id === 1 ? `http://localhost:8800/api/cronograma/${user?.id}` : ''
       try {
-          const response = await fetch(`http://localhost:8800/api/cronograma/2`);
+          const response = await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
           if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -58,11 +67,13 @@ const Agenda = () => {
     }
 
     useEffect(() => {
-        fetchSchedules()
-    },[])
+      fetchSchedules()
+    },[user])
 
-
+  
+  
   return (
+    isAuthenticated ? 
     <div className="tabela-de-sequencia">
           <table>
             <thead>
@@ -71,7 +82,7 @@ const Agenda = () => {
                   Agenda de Atividades
                   <i className="question pi pi-question-circle" 
                     data-pr-tooltip={
-                      userType === 'Terapeuta' ?
+                      user?.user_type_id === 1 ?
                       "Para montar sua agenda semanal, clique no ícone de mais (+) ao lado da semana e escolha as atividades que deseja adicionar. Fácil e rápido!"
                       :
                       "Clique nas atividades que já foram realizadas, e acompanhe sua evolução na barra de progresso."
@@ -91,13 +102,13 @@ const Agenda = () => {
                           atividade={atividade}
                           sequenciaEscolhida={sequenciaEscolhidaBack}
                           setSequenciaEscolhida={setSequenciaEscolhidaBack}
-                          pacienteView={userType === 'terapeuta' ? false : true}
+                          pacienteView={user?.user_type_id === 1 ? false : true}
                         />
                     );
                 })}
             </tbody>
           </table>
-          {userType === 'terapeuta' ? (
+          {user?.user_type_id === 1 ? (
             <Button 
               label="Salvar Cronograma"
               onClick={onSaveSequencia}
@@ -105,7 +116,11 @@ const Agenda = () => {
           ) : (
             <ProgressBar value={calcularProgresso(sequenciaEscolhidaBack)}></ProgressBar>
           )}
-      </div>
+    </div> :
+    <div className='not-logged'>
+      <i className='pi pi-exclamation-circle'></i>
+      <p>Está seção é destinada para montagem e visualização das agendas. Para ter acesso você deve fazer <Link to='/login'>login</Link></p>
+    </div>
   )
 }
 

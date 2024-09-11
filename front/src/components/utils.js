@@ -65,3 +65,28 @@ export const calcularProgresso = (sequenciaEscolhida) => {
     const percentual = (atividadesConcluidas / totalAtividades) * 100;
     return Math.round(percentual); // Arredondar para o inteiro mais próximo
 };
+
+export const fetchData = async (url, method = 'GET', body = null, token = null) => {
+    const options = {
+        method,
+        headers: {
+            'Content-Type': 'application/json',
+            ...(token && { 'Authorization': `Bearer ${token}` }) // Adiciona o token somente se ele for fornecido
+        },
+        ...(body && { body: JSON.stringify(body) }) // Adiciona o body somente se ele for fornecido
+    };
+
+    try {
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.log(`Error fetching data from ${url}:`, error);
+        throw error;
+    }
+};
+

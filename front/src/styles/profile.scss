@@ -7,10 +7,11 @@
     margin: auto;
     width: 85%;
     max-width: 800px;
-    background-color: #0b77a8;
+    background-color: #0A6894;
     padding: 50px;
     position: relative;
     min-height: 360px;
+    color: #C9E9F2;
 
     &-content{
         display: flex;
@@ -25,18 +26,18 @@
         }
         h1{
             font-family: "Edu AU VIC WA NT Hand", cursive;
-            color: #c4e5ec;
+            color: #C9E9F2;
         }
         h5{
             font-size: 16px;
-            color: #c4e5ec;
+            color: #C9E9F2;
         }
 
         .p-inputtext, .p-dropdown{
             background: none;
             border: none;
-            border-bottom: #c4e5ec 1px solid;
-            color: #c4e5ec;
+            border-bottom: #C9E9F2 1px solid;
+            color: #C9E9F2;
 
             width: 45%;
             margin: 10px;
@@ -47,7 +48,7 @@
             }
 
             &::placeholder{
-                color: #c4e5ec;
+                color: #C9E9F2;
             }
             &:focus{
                 box-shadow: none;
@@ -69,14 +70,14 @@
         left: -48px;
 
         button{
-            background: #0b77a8;
+            background: #0A6894;
             border: none;
             &:focus{
                 box-shadow: none;
             }
             &.check{
                 background-color: white;
-                color: #0b77a8;
+                color: #0A6894;
             }
         }
     }
@@ -86,7 +87,38 @@
         right: -20px;
 
         background-color: white;
-        color: #0b77a8;
+        color: #0A6894;
         border: none;
+    }
+
+    .accept-card{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #C9E9F2;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+
+        &-body{
+            p{
+                margin-bottom: 0;
+                color: #0A6894;
+            }
+        }
+
+        button{
+            background: #0A6894;
+            border: none;
+            margin-left: 10px;
+        }
+    }
+}
+
+
+.dropdown-terapeutas{
+    .p-dropdown-items-wrapper ul{
+        padding-left: 0;
     }
 }

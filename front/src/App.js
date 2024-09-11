@@ -8,6 +8,7 @@ import Atividade from './pages/atividade.js';
 import Login from './pages/login.js';
 import Footer from './components/footer.js';
 import Perfil from './pages/perfil.js';
+import ProtectedRoute from './components/protectedRoute.js';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/atividades/:slug" element={<Atividade />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/perfil" element={<ProtectedRoute><Perfil /></ProtectedRoute>} />
           </Routes>
         </main>
         <Footer />
