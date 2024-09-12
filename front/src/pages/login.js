@@ -148,6 +148,12 @@ const Login = () => {
                                         <label htmlFor="feminina">Feminina</label>
                                     </div>
                                 </div>
+                                <div className='cpf-field'>
+                                <FloatLabel>
+                                    <InputMask id="cpf" type='cpf' onChange={(e) => setUser({ ...user, cpf: e.value })} mask="999.999.999-99" />
+                                    <label htmlFor="cpf">CPF</label>
+                                </FloatLabel>
+                                </div>
                             </div>
                             <div className='flex-row'>
                                 <FloatLabel>

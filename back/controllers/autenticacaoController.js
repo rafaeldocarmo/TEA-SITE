@@ -5,7 +5,7 @@ const secretKey = process.env.SECRET_KEY;
 
 export const authController = {
     register: (req, res) => {
-        const { user_type_id, name, email, phone, child_name, child_gender, child_birthdate, senha } = req.body
+        const { user_type_id, name, email, phone, child_name, child_gender, child_birthdate, senha, cpf } = req.body
 
         const qCheckUser = "SELECT * FROM users WHERE email = ?"
         db.query(qCheckUser, [email], (error, response) => {
@@ -19,10 +19,10 @@ export const authController = {
 
             const hashedPassword = bcrypt.hashSync(senha, 8)
             const qInsertUser = `
-                INSERT INTO users (user_type_id, name, email, phone, child_name, child_gender, child_birthdate, senha)
+                INSERT INTO users (user_type_id, name, email, phone, child_name, child_gender, child_birthdate, senha, cpf)
                 VALUES (?, ?, ?, ?, ?, ? , ?, ?)
             `
-            const values = [user_type_id, name, email, phone, child_name, child_gender, child_birthdate, hashedPassword]
+            const values = [user_type_id, name, email, phone, child_name, child_gender, child_birthdate, hashedPassword, cpf]
 
             db.query(qInsertUser, values, (error) => {
                 if (error) {
