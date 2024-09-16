@@ -1,5 +1,19 @@
 import { db } from "../db.js"
 
+export const getPatients = (req, res) => {
+    
+    const query = `SELECT * FROM users WHERE user_type_id = 2;`; 
+
+    db.query(query, (error, results) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Erro ao buscar pacientes', error });
+        }
+
+        return res.status(200).json(results);
+    });
+};
+
 export const getTherapist = (req, res) => {
 
     const query = ` SELECT * from users WHERE user_type_id = 1; `;
@@ -104,5 +118,36 @@ export const countAmizades = (req, res) => {
         } else {
             return res.status(404).json({ message: 'No related user found' });
         }
+    });
+};
+
+export const getFriendships = (req, res) => {
+    const userId = req.params.id;
+
+    const query = `
+        SELECT 
+            tp.id AS friendship_id,
+            u.id AS user_id,
+            u.name,
+            u.email,
+            u.child_name,
+            tp.status
+        FROM 
+            therapist_patient tp
+        INNER JOIN 
+            users u ON (tp.therapist_id = u.id OR tp.patient_id = u.id)
+        WHERE 
+            (tp.therapist_id = ? OR tp.patient_id = ?)
+            AND tp.status = 'check'
+            AND u.id != ?; -- Exclui o próprio usuário das amizades
+    `;
+
+    db.query(query, [userId, userId, userId], (error, results) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Erro ao buscar amizades', error });
+        }
+
+        return res.status(200).json(results);
     });
 };

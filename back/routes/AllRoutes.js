@@ -1,6 +1,6 @@
 import  express  from "express";
 import { addSchedule, editSchedule, getSchedules } from "../controllers/cronograma.js";
-import { acceptFriendRequest, askNewAmizade, countAmizades, getPendingFriendRequests, getTherapist } from "../controllers/amizades.js";
+import { acceptFriendRequest, askNewAmizade, countAmizades, getPendingFriendRequests, getPatients, getFriendships} from "../controllers/amizades.js";
 import { authController } from "../controllers/autenticacaoController.js";
 import { getUser } from "../controllers/usuario.js";
 
@@ -28,15 +28,6 @@ router
     .get(authController.verifyToken, getSchedules)
 
 router
-    .route('/api/terapeutas')
-    .get(authController.verifyToken, getTherapist)
-    .post(authController.verifyToken, acceptFriendRequest)
-
-router
-    .route('/api/terapeutas/:id')
-    .get(authController.verifyToken, getPendingFriendRequests)
-
-router
     .route('/api/request')
     .post(authController.verifyToken, askNewAmizade)
 
@@ -44,5 +35,17 @@ router
     .route('/api/request/:id')
     .get(authController.verifyToken, countAmizades)
 
+router
+    .route('/api/pacientes')
+    .get(authController.verifyToken, getPatients)
+    .post(authController.verifyToken, acceptFriendRequest)
+    
+router
+    .route('/api/pacientes/:id')
+    .get(authController.verifyToken, getPendingFriendRequests)
+
+router
+    .route('/api/amizades/:id')
+    .get(authController.verifyToken, getFriendships);
     
 export default router
