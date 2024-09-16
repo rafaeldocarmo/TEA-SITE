@@ -6,6 +6,8 @@ import { StepperPanel } from 'primereact/stepperpanel';
 import { Tree } from 'primereact/tree';
 import { Button } from 'primereact/button';
 import { treeTableAtv } from "../mocks/atividades";
+import { atividade } from "../mocks/atividades";
+
 
 
 const Accordions = () => {
@@ -29,8 +31,21 @@ const Accordions = () => {
   }
   const onRowSelect = (e) => {
     const selectedAtividade = e.node;
-    if(selectedAtividade.slug !== ''){
-      navigate(`/atividades/${selectedAtividade.slug}`);
+    if(selectedAtividade.children){
+      navigate(`/${selectedAtividade.slug}`);
+    } else {
+      let currentCategory, currentActivity;
+      for (const category of atividade) {
+        const item = category.items.find(item => item.slug === selectedAtividade.slug);
+        if (item) {
+          currentCategory = category;
+          currentActivity = item;
+          break;
+        }
+      }
+      if(selectedAtividade.slug !== ''){
+        navigate(`/${currentCategory.slug}/${selectedAtividade.slug}`);
+      }
     }
   };
 

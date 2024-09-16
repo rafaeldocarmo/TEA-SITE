@@ -51,16 +51,21 @@ const Atividade = () => {
         <BreadCrumb home={home} model={items}/>
 
         <div className="next-prev-buttons">
-          <Button
-            label="<- Anterior"
-            unstyled
-            onClick={goToPreviousActivity} 
-          />
-          <Button
-            label="Próxima ->"
-            unstyled
-            onClick={goToNextActivity} 
-          />
+          {currentIndex > 0 ? 
+            <Button
+              label="<- Anterior"
+              unstyled
+              onClick={goToPreviousActivity} 
+            /> : <p></p>
+          }
+          {currentIndex < allItems.length - 1 ? 
+            <Button
+              label="Próxima ->"
+              unstyled
+              onClick={goToNextActivity} 
+            />
+            : <p></p>
+          }
         </div>
 
         <h2><Link className="current-hability" to='/#section'>{currentCategory.name}</Link>: {currentActivity.nome}</h2>

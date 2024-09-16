@@ -14,7 +14,9 @@ const Perfil = () => {
     const [terapeuta, setTerapeuta] = useState(null);
     const [listaTerapeutas, setListaTerapeutas] = useState([]);
     const [listOfRelations, setListOfRelations] = useState()
+    const [userFirstName, setUserFirstName] = useState()
     const { isAuthenticated, user, token } = useContext(AuthContext);
+    
 
     // Método para buscas os pacientes disponiveis
     const fetchAllPacients = async () => {
@@ -68,7 +70,11 @@ const Perfil = () => {
     useEffect(() => {
         fetchAllPacients();
         if(user) countRelations();
+        console.log(user)
     }, [])
+    useEffect(() => {
+        setUserFirstName(user?.name?.split(' ')[0])
+    }, [user])
   
 
     return (
@@ -79,7 +85,7 @@ const Perfil = () => {
             {isPerfil ? (
                 <>
                     <div>
-                        <h1>Bem vindo, Usuário</h1>
+                        <h1>Bem vindo, {userFirstName}</h1>
 
                         <InputText id='responsible-name' placeholder='Username'/>
                         <InputText id='responsible-name' placeholder='Telefone'/>
@@ -106,7 +112,7 @@ const Perfil = () => {
                                 optionLabel='name'
                                 optionValue='id'
                                 onChange={(e) => setTerapeuta(e.value)}
-                                placeholder="Selecione um terapeuta"
+                                placeholder="Selecione um paciente"
                                 filter
                                 panelClassName="dropdown-terapeutas"
                             />
@@ -119,7 +125,7 @@ const Perfil = () => {
                         <TabPanel header='Seus pacientes'>
                             <h1>Seus pacientes</h1>
                             <h5>Aqui você pode visualizar quem é são seus atuais pacientes. </h5>
-                            {listOfRelations.length > 0 ? listOfRelations.map((item) => {
+                            {listOfRelations?.length > 0 ? listOfRelations.map((item) => {
                             return (
                                 <div className='accept-card' key={item.id}>
                                     <div className='accept-card-body'>
@@ -133,7 +139,7 @@ const Perfil = () => {
                                     </div>
                                 </div>
                             )
-                        }) : <p><i className='pi pi-exclamation-circle'></i> Você não possui solicitações ou pacientes</p>}
+                        }) : <h5><i className='pi pi-exclamation-circle'></i> Você não possui solicitações ou pacientes</h5>}
                         </TabPanel>
                     </TabView>
                 ) : (

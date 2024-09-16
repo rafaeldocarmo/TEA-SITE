@@ -139,6 +139,10 @@ main{
           border: none;
         }
       }
+      
+      span{
+        text-transform: capitalize;
+      }
 
       &:hover{
         background-color: #C9E9F254;
@@ -149,6 +153,10 @@ main{
     .p-treenode-leaf{
       .p-treenode-selectable{
         font-weight: 400;
+
+        button{
+          display: none;
+        }
       }
     }
   }
