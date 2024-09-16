@@ -1,10 +1,22 @@
 import  express  from "express";
 import { addSchedule, editSchedule, getSchedules } from "../controllers/cronograma.js";
-import { acceptFriendRequest, getPendingFriendRequests, getTherapist } from "../controllers/amizades.js";
+import { acceptFriendRequest, askNewAmizade, countAmizades, getPendingFriendRequests, getTherapist } from "../controllers/amizades.js";
 import { authController } from "../controllers/autenticacaoController.js";
 import { getUser } from "../controllers/usuario.js";
 
 const router = express.Router()
+
+router
+    .route('/api/register')
+    .post(authController.register)
+
+router
+    .route('/api/login')
+    .post(authController.login)
+    
+router
+    .route('/api/usuario/:id')
+    .get(authController.verifyToken, getUser)
 
 router
     .route('/api/cronograma')
@@ -17,7 +29,7 @@ router
 
 router
     .route('/api/terapeutas')
-    .get(getTherapist)
+    .get(authController.verifyToken, getTherapist)
     .post(authController.verifyToken, acceptFriendRequest)
 
 router
@@ -25,15 +37,12 @@ router
     .get(authController.verifyToken, getPendingFriendRequests)
 
 router
-    .route('/api/usuario/:id')
-    .get(authController.verifyToken, getUser)
+    .route('/api/request')
+    .post(authController.verifyToken, askNewAmizade)
 
 router
-    .route('/api/register')
-    .post(authController.register)
+    .route('/api/request/:id')
+    .get(authController.verifyToken, countAmizades)
 
-router
-    .route('/api/login')
-    .post(authController.login)
     
 export default router

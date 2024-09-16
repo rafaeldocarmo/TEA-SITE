@@ -80,3 +80,29 @@ export const getPendingFriendRequests = (req, res) => {
         return res.status(200).json(results);
     });
 };
+
+export const countAmizades = (req, res) => {
+    const id  = req.params.id;
+
+    const q = `
+        SELECT u.name, u.email, u.id
+        FROM therapist_patient tp
+        JOIN users u ON (tp.therapist_id = u.id OR tp.patient_id = u.id)
+        WHERE (tp.therapist_id = ? AND tp.patient_id != ?)
+           OR (tp.patient_id = ? AND tp.therapist_id != ?)
+    `;
+
+    const params = [id, id, id, id];
+
+    db.query(q, params, (error, results) => {
+        if (error) return res.status(500).json(error);
+
+        const filteredResults = results.filter(result => result.name !== undefined);
+        
+        if (filteredResults.length > 0) {
+            return res.status(200).json(filteredResults[0]);
+        } else {
+            return res.status(404).json({ message: 'No related user found' });
+        }
+    });
+};
