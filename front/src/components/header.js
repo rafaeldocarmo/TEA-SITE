@@ -1,7 +1,7 @@
 import '../styles/main.scss'
 import React, { useEffect, useRef, useContext } from 'react'
 import Container from 'react-bootstrap/Container';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { HashLink } from 'react-router-hash-link';
@@ -10,20 +10,25 @@ import { AuthContext } from '../context/authProvider';
 const Header = (props) => {
   const menuRight = useRef(null);
   const { isAuthenticated } = useContext(AuthContext);
-
+  const navigate = useNavigate()
   const items = [
     {
         label: 'Home',
-        url: '/'
+        command: () => navigate('/')
     },
     {
-      label: 'Quem Somos',
-      url: '/'
+        label: 'Quem Somos',
+        command: () => navigate('/#quemsomos')
     },
-    {
+    ...(isAuthenticated ? 
+    [{
+      label: 'Perfil',
+      command: () => navigate('/perfil')
+    }] : 
+    [{
       label: 'Login',
-      url: '/login'
-    },
+      command: () => navigate('/login')
+    }])
   ];
 
   return (

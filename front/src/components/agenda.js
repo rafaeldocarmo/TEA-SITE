@@ -62,34 +62,35 @@ const Agenda = () => {
     };
   
     const fetchSchedules = async () => {
-      let data;
-      if(user?.user_type_id !== 1){
-        data = await fetchData(`http://localhost:8800/api/pacientes/${user?.id}?user_type_id=${user?.user_type_id}`, 'GET', null, token);
-      }
-      const endpoint = user?.user_type_id === 1 ? `http://localhost:8800/api/cronograma/${user?.id}` : `http://localhost:8800/api/cronograma/${data[0]?.user_id}`
-      try {
-          const response = await fetch(endpoint, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        });
-          if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          setIsEdit(true)
-          const data = await response.json();
-          setCronoId(data[0].id)
-          setSequenciaEscolhidaBack(transformData(data[0]));
-      } catch (error) {
-        console.log(error)
+      if(user){
+        let data;
+        if(user?.user_type_id !== 1){
+          data = await fetchData(`http://localhost:8800/api/pacientes/${user?.id}?user_type_id=${user?.user_type_id}`, 'GET', null, token);
+        }
+        const endpoint = user?.user_type_id === 1 ? `http://localhost:8800/api/cronograma/${user?.id}` : data[0]?.status === 'check' ? `http://localhost:8800/api/cronograma/${data[0]?.user_id}` : ''
+        try {
+            const response = await fetch(endpoint, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+              },
+          });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            setIsEdit(true)
+            const data = await response.json();
+            setCronoId(data[0].id)
+            setSequenciaEscolhidaBack(transformData(data[0]));
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
 
     useEffect(() => {
       fetchSchedules()
-      console.log(sequenciaEscolhidaBack)
     },[user])
 
   
@@ -98,7 +99,7 @@ const Agenda = () => {
     <>
       <Toast ref={toast} />
       {isAuthenticated ?
-      (sequenciaEscolhidaBack.length > 0 ? 
+      (sequenciaEscolhidaBack.length > 0 || user?.user_type_id === 1 ? 
       <div className="tabela-de-sequencia">
             <table>
               <thead>

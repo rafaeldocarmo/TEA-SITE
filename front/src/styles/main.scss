@@ -84,7 +84,7 @@ header {
 .menu-hamb {
     width: auto;
     border-radius: 8px;
-    background-color: #0A6894;
+    background-color: #0A6894 !important;
     z-index: 9999 !important;
 
     ul {
@@ -100,14 +100,15 @@ header {
         li .p-menuitem-link {
             text-decoration: none;
             color: #0A6894;
+            background-color: #0A6894 !important;
         }
 
         li .p-menuitem-content:hover {
-            background: white;
-            color: #0A6894;
+            background: 0A6894;
+            color: #C9E9F2;
 
             .p-menuitem-link span {
-                color: #0A6894;
+                color: #C9E9F2;
             }
         }
 

@@ -167,9 +167,11 @@ main{
   border: none;
   position: absolute;
   top: 80px;
+  padding-bottom: 10px;
 
   ol{
     padding: 0px;
+    margin: 0;
   }
 
   ol li a{
@@ -237,6 +239,10 @@ main{
         font-weight: bold;
       }
     }
+
+    @media screen and (max-width: 900px) {
+      flex-direction: column;
+    }
   }
 }
 
@@ -246,6 +252,11 @@ main{
   flex-direction: column;
   text-align: center;
   color: #ffffff;
+
+  @media(max-width: 900px){
+    width: 100%;
+    padding: 30px;
+  }
 }
 
 .not-logged{

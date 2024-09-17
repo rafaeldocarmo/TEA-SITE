@@ -89,6 +89,16 @@
                 background: none;
             }
         }
+
+        @media (max-width: 900px){
+            flex-direction: column;
+            .p-inputtext, .p-dropdown{
+                width: 90%;
+            }
+            .p-tabview-panels{
+                padding: 20px 0;
+            }
+        }
     }
 
     .selectTab{
@@ -97,14 +107,15 @@
         left: -48px;
 
         button{
-            background: #0A6894;
+            background: white;
+            color: #0A6894;
             border: none;
             &:focus{
                 box-shadow: none;
             }
             &.check{
-                background-color: white;
-                color: #0A6894;
+                background-color: #0A6894;
+                color: white;
             }
         }
     }
@@ -139,6 +150,25 @@
             background: #0A6894;
             border: none;
             margin-left: 10px;
+        }
+    }
+
+    @media (max-width: 900px){
+        margin-top: 50px;
+
+        .selectTab{
+            left: 50%;
+            transform: translateX(-50%);
+            top: -48px;
+            display: inline-flex;
+            width: 100px;
+        }
+        .accept-card{
+            &-body{
+                p{
+                   font-size: 13px;
+                }
+            }
         }
     }
 }

@@ -101,11 +101,13 @@ const Perfil = () => {
 
     // Método para trazer as amizades
     const countRelations = async () => {
-        try {
-            const data = await fetchData(`http://localhost:8800/api/pacientes/${user?.id}?user_type_id=${user?.user_type_id}`, 'GET', null, token);
-            setListOfRelations(data)
-        } catch (error) {
-            console.log(error);
+        if(user){
+            try {
+                const data = await fetchData(`http://localhost:8800/api/pacientes/${user?.id}?user_type_id=${user?.user_type_id}`, 'GET', null, token);
+                setListOfRelations(data)
+            } catch (error) {
+                console.log(error);
+            }
         }
     };    
 
@@ -114,7 +116,7 @@ const Perfil = () => {
         fetchAllPacients();
         if(user) countRelations();
         setUserFirstName(user?.name?.split(' ')[0])
-        if(user.user_type_id === 1){
+        if(user?.user_type_id === 1){
             setIsTerapeuta(true)
         }
     }, [user])

@@ -158,14 +158,14 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
                     </div>
                 </div>
             </div>
-            {hasEspeciality && (
-                <div className='flex-row'>
-                    <Input type='text' name='Especialidade' onChange={(e) => setUser({ ...user, especialidade: e.target.value })} label="Especialidade" />
-                </div>
-            )} 
             <div className='flex-row'>
                 <Input type='text' name='responsible-name' onChange={(e) => setUser({ ...user, name: e.target.value })} label="Nome do Responsável" />
-                <Input type='text' name='nome-da-crianca' onChange={(e) => setUser({ ...user, child_name: e.target.value })} label="Nome da criança" />
+            {hasEspeciality ? (
+                <Input type='text' value={user.especialidade} name='Especialidade' onChange={(e) => setUser({ ...user, especialidade: e.target.value })} label="Especialidade" />
+            ): (
+                <Input type='text' value={user.child_name} name='nome-da-crianca' onChange={(e) => setUser({ ...user, child_name: e.target.value })} label="Nome da criança" />
+            )
+            } 
             </div>
             <div className='flex-row'>
                 <Input type='mask' name='data_de_nascimento' onChange={(e) => setUser({ ...user, child_birthdate: e.target.value })} label="Data de nascimento" mask="99/99/9999" />                          
