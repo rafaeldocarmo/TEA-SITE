@@ -71,17 +71,13 @@ export const fetchData = async (url, method = 'GET', body = null, token = null) 
         method,
         headers: {
             'Content-Type': 'application/json',
-            ...(token && { 'Authorization': `Bearer ${token}` }) // Adiciona o token somente se ele for fornecido
+            ...(token && { 'Authorization': `Bearer ${token}` })
         },
-        ...(body && { body: JSON.stringify(body) }) // Adiciona o body somente se ele for fornecido
+        ...(body && { body: JSON.stringify(body) })
     };
 
     try {
         const response = await fetch(url, options);
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
 
         return await response.json();
     } catch (error) {

@@ -92,10 +92,6 @@ const Atividade = () => {
             <p>{currentActivity.duracao} minutos</p>
           </div>}
         </div>
-
-        {/* <div className='img-div'>
-            <img src={login} alt='criança brincando' />
-        </div> */}
     </div>
   )
 }

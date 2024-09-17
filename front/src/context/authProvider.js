@@ -51,12 +51,14 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('token');
         setToken(null);
         setIsAuthenticated(false);
+        setUser([])
     };
 
     const login = (newToken) => {
         localStorage.setItem('token', newToken);
         setToken(newToken);
         setIsAuthenticated(true);
+        getUser()
     };
 
     
