@@ -14,11 +14,19 @@ const Accordions = () => {
 
   const stepperRef = useRef(null);
   const navigate = useNavigate();
-  const [dataAtividades, setDataAtividades] = useState([])
+  const [dataAtividades, setDataAtividades] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     treeTableAtv.getTreeAtividade().then((data) => setDataAtividades(data));
+
+    const userLoggedIn = checkUserAuthentication(); 
+    setIsAuthenticated(userLoggedIn);
   }, []);
+
+  const checkUserAuthentication = () => {
+    return localStorage.getItem("token") ? true : false;
+  };
 
   const accordionHeader = (text) => {
     return(
@@ -34,12 +42,12 @@ const Accordions = () => {
     if(selectedAtividade.children){
       navigate(`/${selectedAtividade.slug}`);
     } else {
-      let currentCategory, currentActivity;
+      let currentCategory;
       for (const category of atividade) {
         const item = category.items.find(item => item.slug === selectedAtividade.slug);
         if (item) {
           currentCategory = category;
-          currentActivity = item;
+          //currentActivity = item;
           break;
         }
       }
@@ -85,12 +93,11 @@ const Accordions = () => {
           </Stepper>
         </AccordionTab>
 
-
+        {isAuthenticated && (
         <AccordionTab header={accordionHeader('Intervenções')}>
             <Tree  value={dataAtividades} className="tabela-de-atividades" selectionMode="single" onSelect={onRowSelect} showHeader={false} />
-            
         </AccordionTab>
-            <h1 id="section"></h1>
+        )};
     </Accordion>
   )
 }

@@ -35,7 +35,7 @@ const Header = (props) => {
     <>
       <header>
           <Container className='header-content header-desktop'>
-            <h1>TEA</h1>
+            <h1>ESTIMULA TEA</h1>
             <div>
               <Link className='header-item' to="/">Home</Link>
               <HashLink to="/#quemsomos" className='header-item' scroll={(el) => el.scrollIntoView({ behavior: 'auto', block: 'center' })}>Quem Somos</HashLink>
@@ -43,7 +43,7 @@ const Header = (props) => {
             </div>
           </Container>
           <Container className='header-content header-mobile'>
-            <h1>TEA</h1>
+            <h1>Estimula TEA</h1>
             <Menu model={items} popup ref={menuRight} id="popup_menu_right" className='menu-hamb' />
             <Button icon="pi pi-bars" className="mr-2" unstyled onClick={(event) => menuRight.current.toggle(event)} />
           </Container>
