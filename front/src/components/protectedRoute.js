@@ -8,11 +8,29 @@ const ProtectedRoute = ({ children }) => {
 
     useEffect(() => {
         if (!isAuthenticated) {
-            navigate('/login');
+            setTimeout(() => {
+                navigate('/login');
+            }, 5000)
         }
     }, [isAuthenticated, navigate]);
 
-    return isAuthenticated ? children : null;
+    return (
+        <>
+            {!isAuthenticated && 
+                <div style={{
+                    height: "70vh",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    fontSize: '24px',
+                    color: '#0A6894'
+                }}>
+                    Você precisa estar logado para acessar esta página. Em 5 segundos vai ser redirecionado à página de login.
+                </div>
+            }
+            {isAuthenticated ? children : null}
+        </>
+    );
 };
 
 export default ProtectedRoute;

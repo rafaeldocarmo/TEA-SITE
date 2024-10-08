@@ -69,6 +69,9 @@ const Atividade = () => {
         </div>
 
         <h2><Link className="current-hability" to='/#section'>{currentCategory.name}</Link>: {currentActivity.nome}</h2>
+        {currentActivity.duracao && 
+          <h4>Duração: {currentActivity.duracao}</h4>
+        }
 
         <div className="activies-grid">
           <div className="box">
@@ -86,11 +89,10 @@ const Atividade = () => {
             <p>{currentActivity.descricao}</p>
           </div>
 
-          {currentActivity.duracao && 
-          <div className="box">
-            <p className="title">Duração</p>
-            <p>{currentActivity.duracao} minutos</p>
-          </div>}
+        </div>
+
+        <div className="img-atividade">
+          <img src={currentActivity.img} alt=""/>
         </div>
     </div>
   )

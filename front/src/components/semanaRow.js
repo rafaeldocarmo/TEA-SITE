@@ -1,6 +1,9 @@
 import React from 'react'
 import { MultiSelect } from "primereact/multiselect";
 import { Checkbox } from 'primereact/checkbox';
+import { Tooltip } from 'primereact/tooltip';
+import { Link } from 'react-router-dom';
+import { atividade } from '../mocks/atividades';
 
 const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida, pacienteView }) => {
     
@@ -54,7 +57,7 @@ const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida,
     
       setSequenciaEscolhida(updatedSequenciaEscolhida);
     };
-  
+
     const atividadesDaSemana = sequenciaEscolhida.find(item => item[data.semana]);
 
     return (
@@ -73,9 +76,20 @@ const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida,
                         className="checkbox-progress" 
                         inputId={`checkbox-${data.semana}-${index}`}
                       />
-                      <label htmlFor={`checkbox-${data.semana}-${index}`} key={index} className={item.isCheck ? 'check' : ''}>
+                      <label 
+                        htmlFor={`checkbox-${data.semana}-${index}`} 
+                        id={`label-${item.value}-${index}-${data.semana.slice(7)}`} 
+                        key={index} 
+                        className={`atividade-paciente ${item.isCheck ? 'check' : ''}`} 
+                        data-pr-hidedelay={1000}
+                        data-pr-autohide={false}
+                        data-pr-position='top'
+                      >
                         {item.nome}
                       </label>
+                      <Tooltip target={`#label-${item.value}-${index}-${data.semana.slice(7)}`} className="tooltip-atividade">
+                          <Link to={`/${getHabilidadeSlug(item.value)}/${item.value}`}>Ver atividade</Link>
+                      </Tooltip>
                     </> 
                   ) : (
                     <label key={index} onClick={() => removeAtividade(data.semana, index)}>
@@ -110,5 +124,18 @@ const SemanaRow = ({ data, atividade, sequenciaEscolhida, setSequenciaEscolhida,
       </tr>
     );
 };
+
+function getHabilidadeSlug(activitySlug) {
+  const mapAtividades = atividade.map(item => {
+    return{
+      slug: item.slug,
+      itemSlugs: item.items.map(subItem => subItem.slug)
+    }
+  })
+  const habilidade = mapAtividades.find(item => 
+    item.itemSlugs.includes(activitySlug)
+  );
+  return habilidade ? habilidade.slug : null;
+}
 
 export default SemanaRow

@@ -8,15 +8,17 @@ import { AuthContext } from '../context/authProvider';
 import { fetchData } from '../components/utils';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Toast } from 'primereact/toast';
+import { useNavigate } from 'react-router-dom';
 
 const Perfil = () => {
     const [isPerfil, setIsPerfil] = useState(true)
     const [isTerapeuta, setIsTerapeuta] = useState(false)
     const [paciente, setPaciente] = useState(null);
     const [listaTerapeutas, setListaTerapeutas] = useState([]);
-    const [listOfRelations, setListOfRelations] = useState()
+    const [listOfRelations, setListOfRelations] = useState([])
     const [userFirstName, setUserFirstName] = useState()
     const toast = useRef()
+    const navigate = useNavigate()
     const { isAuthenticated, user, token, logout } = useContext(AuthContext);
     
 
@@ -144,7 +146,7 @@ const Perfil = () => {
                         <Button
                             className='edit' 
                             label='Sair'
-                            onClick={() => logout()}
+                            onClick={() => {logout(); navigate('/login')}}
                         />
                     </>
                 ) : (

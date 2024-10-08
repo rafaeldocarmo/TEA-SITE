@@ -22,7 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:slug" element={<Habilidades />} />
-            <Route path="/:slugHabilidade/:slug" element={<Atividade />} />
+            <Route path="/:slugHabilidade/:slug" element={<ProtectedRoute><Atividade /></ProtectedRoute>} />
             <Route path="/login" element={<Login />} />
             <Route path="/perfil" element={<ProtectedRoute><Perfil /></ProtectedRoute>} />
           </Routes>

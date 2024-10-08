@@ -1,11 +1,11 @@
 import { db } from "../db.js"
 
 export const addSchedule = async (req, res) => {
-    const { user_id, week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8 } = req.body;
+    const { user_id, week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8, mensagem } = req.body;
 
-    const q = 'INSERT INTO schedules (user_id, week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    const q = 'INSERT INTO schedules (user_id, week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8, mensagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
 
-    db.query(q, [user_id, week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8], (error) => {
+    db.query(q, [user_id, week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8, mensagem], (error) => {
         if (error) {
             console.error(error);
             return res.status(500).json(error);
@@ -17,11 +17,11 @@ export const addSchedule = async (req, res) => {
 }
 
 export const editSchedule = async (req, res) => {
-    const {  week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8, user_id, id } = req.body;
+    const {  week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8, mensagem, id } = req.body;
 
-    const q = "UPDATE schedules SET `user_id` = ? , `week_1` = ?, `week_2` = ?, `week_3` = ?, `week_4` = ?, `week_5` = ?, `week_6` = ?, `week_7` = ?, `week_8` = ? WHERE `id` = ?;"
+    const q = "UPDATE schedules SET `week_1` = ?, `week_2` = ?, `week_3` = ?, `week_4` = ?, `week_5` = ?, `week_6` = ?, `week_7` = ?, `week_8` = ?, `mensagem` = ? WHERE `id` = ?;"
 
-    db.query(q, [user_id, week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8, id], (error) => {
+    db.query(q, [week_1, week_2, week_3, week_4, week_5, week_6, week_7, week_8, mensagem, id], (error) => {
         if (error) {
             console.error(error);
             return res.status(500).json(error);

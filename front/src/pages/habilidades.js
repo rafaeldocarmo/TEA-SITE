@@ -16,7 +16,6 @@ const Habilidades = () => {
 
   const nomeAtividade = encontrarNomePorSlug();
 
-  console.log(nomeAtividade)
 
   return (
     <Container className='habilidades-container'>

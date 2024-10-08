@@ -93,11 +93,10 @@ const Accordions = () => {
           </Stepper>
         </AccordionTab>
 
-        {isAuthenticated && (
         <AccordionTab header={accordionHeader('Intervenções')}>
             <Tree  value={dataAtividades} className="tabela-de-atividades" selectionMode="single" onSelect={onRowSelect} showHeader={false} />
         </AccordionTab>
-        )};
+        
     </Accordion>
   )
 }

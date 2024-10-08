@@ -77,6 +77,7 @@ export const getPendingFriendRequests = (req, res) => {
                 a.id AS request_id,
                 a.status AS status,
                 u.name AS nome,
+                u.cpf AS cpf,
                 u.email AS email,
                 u.child_name AS child_name,
                 u.id AS user_id -- Renomeia u.id para user_id

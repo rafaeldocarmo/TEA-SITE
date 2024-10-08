@@ -17,6 +17,11 @@ export const prepareDataForBackend = (sequenciaEscolhida) => {
 export function transformData(input) {
     const result = [];
 
+    // Função para remover acentos de uma string
+    const removeAcentos = (str) => {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+
     for (let i = 1; i <= 8; i++) {
         const weekKey = `week_${i}`;
         if (input[weekKey]) {
@@ -28,7 +33,12 @@ export function transformData(input) {
                 const isCheck = isCheckStr && isCheckStr.replace(')', '').trim() === 'true';
                 
                 const formattedNome = nome.trim();
-                const formattedValue = formattedNome.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]/g, '');
+                // Remove acentos antes de formatar o valor
+                const formattedValue = removeAcentos(formattedNome)
+                    .toLowerCase()
+                    .replace(/\s+/g, '-')  // Substitui espaços por hífens
+                    .replace(/\//g, '-')   // Substitui barras por hífens
+                    .replace(/[^\w\-]/g, ''); // Remove caracteres especiais, exceto hífen
 
                 return {
                     nome: formattedNome,
@@ -63,7 +73,7 @@ export const calcularProgresso = (sequenciaEscolhida) => {
     });
 
     const percentual = (atividadesConcluidas / totalAtividades) * 100;
-    return Math.round(percentual); // Arredondar para o inteiro mais próximo
+    return Math.round(percentual);
 };
 
 export const fetchData = async (url, method = 'GET', body = null, token = null) => {
