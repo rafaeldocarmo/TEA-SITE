@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/authProvider';
 import Container from 'react-bootstrap/Container';
 import Input from '../components/input';
+import { url } from '../url';
         
 
 const Login = () => {
@@ -29,7 +30,7 @@ const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8800/api/login', {
+            const response = await fetch(`${url}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,7 +121,7 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
 
     const OnSave = async () => {
         try {
-            const response = await fetch('http://localhost:8800/api/register', {
+            const response = await fetch(`${url}/api/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

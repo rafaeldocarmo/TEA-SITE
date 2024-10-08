@@ -9,6 +9,7 @@ import { fetchData } from '../components/utils';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Toast } from 'primereact/toast';
 import { useNavigate } from 'react-router-dom';
+import { url } from '../url';
 
 const Perfil = () => {
     const [isPerfil, setIsPerfil] = useState(true)
@@ -24,7 +25,7 @@ const Perfil = () => {
 
     // Método para buscas os pacientes disponiveis
     const fetchAllPacients = async () => {
-        const endpoint = `http://localhost:8800/api/pacientes`;
+        const endpoint = `${url}/api/pacientes`;
         try {
             const data = await fetchData(endpoint, 'GET', null, token);
             setListaTerapeutas(data);
@@ -36,7 +37,7 @@ const Perfil = () => {
     // Método para enviar solicitacão de amizades
     const sendRequest = async () => {
         try {
-            const data = await fetchData('http://localhost:8800/api/request', 'POST', { therapist_id: user?.id, patient_id: paciente }, token);
+            const data = await fetchData(`${url}/api/request`, 'POST', { therapist_id: user?.id, patient_id: paciente }, token);
     
             if (data) {
                 fetchAllPacients();
@@ -51,7 +52,7 @@ const Perfil = () => {
     // Método para aceitar solicitacão de amizades
     const onAccept = async (idTerapeuta) => {
         try {
-            const response = await fetch('http://localhost:8800/api/pacientes', {
+            const response = await fetch(`${url}/api/pacientes`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -88,7 +89,7 @@ const Perfil = () => {
 
     const deleteFriendship = async (id) => {
         try {
-            const data = await fetchData(`http://localhost:8800/api/request/${id}`, 'DELETE', null, token);
+            const data = await fetchData(`${url}/api/request/${id}`, 'DELETE', null, token);
     
             if (data) {
                 fetchAllPacients();
@@ -105,7 +106,7 @@ const Perfil = () => {
     const countRelations = async () => {
         if(user){
             try {
-                const data = await fetchData(`http://localhost:8800/api/pacientes/${user?.id}?user_type_id=${user?.user_type_id}`, 'GET', null, token);
+                const data = await fetchData(`${url}/api/pacientes/${user?.id}?user_type_id=${user?.user_type_id}`, 'GET', null, token);
                 setListOfRelations(data)
             } catch (error) {
                 console.log(error);

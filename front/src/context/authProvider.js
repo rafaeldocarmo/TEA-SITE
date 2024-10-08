@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
+import { url } from '../url';
 
 
 export const AuthContext = createContext();
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
         if(savedToken) {
         const jwt = jwtDecode(savedToken)
         try {
-            const response = await fetch(`http://localhost:8800/api/usuario/${jwt.id}`, {
+            const response = await fetch(`${url}/api/usuario/${jwt.id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

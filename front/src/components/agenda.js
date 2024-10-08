@@ -14,7 +14,7 @@ import { Toast } from 'primereact/toast';
 import { fetchData } from '../components/utils';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-
+import { url } from '../url.js';
 
 const Agenda = () => {
 
@@ -30,7 +30,7 @@ const Agenda = () => {
     
     const onSaveSequencia = async (isPaciente = false) => {
       try {
-          const response = await fetch(`http://localhost:8800/api/cronograma/`, {
+          const response = await fetch(`${url}/api/cronograma/`, {
               method: isEdit ? 'PUT' : 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const Agenda = () => {
   
     const fetchSchedules = async () => {
       if(user){
-        const endpoint = user?.user_type_id === 1 ? `http://localhost:8800/api/cronograma/${pacienteID?.user_id}` : `http://localhost:8800/api/cronograma/${user?.id}`
+        const endpoint = user?.user_type_id === 1 ? `${url}/api/cronograma/${pacienteID?.user_id}` : `${url}/api/cronograma/${user?.id}`
         try {
             const response = await fetch(endpoint, {
               method: 'GET',
@@ -98,7 +98,7 @@ const Agenda = () => {
 
     const fetchAllPacients = async () => {
       try {
-          const data = await fetchData(`http://localhost:8800/api/pacientes/${user?.id}?user_type_id=${user?.user_type_id}`, 'GET', null, token);
+          const data = await fetchData(`${url}/api/pacientes/${user?.id}?user_type_id=${user?.user_type_id}`, 'GET', null, token);
           setListadePacientes(data.filter(item => item.status === 'check'))
       } catch (error) {
           console.log(error);
