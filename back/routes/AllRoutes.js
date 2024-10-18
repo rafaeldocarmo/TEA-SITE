@@ -3,6 +3,7 @@ import { addSchedule, editSchedule, getSchedules } from "../controllers/cronogra
 import { acceptFriendRequest, askNewAmizade, countAmizades, getPendingFriendRequests, getPatients, getFriendships, declineAmizade} from "../controllers/amizades.js";
 import { authController } from "../controllers/autenticacaoController.js";
 import { getUser } from "../controllers/usuario.js";
+import { contatoEmail } from "../controllers/enviarEmail.js";
 
 const router = express.Router()
 
@@ -43,5 +44,8 @@ router
 router
     .route('/api/pacientes/:id')
     .get(authController.verifyToken, getPendingFriendRequests)
+
+router
+    .post('/api/contato', contatoEmail);
 
 export default router
