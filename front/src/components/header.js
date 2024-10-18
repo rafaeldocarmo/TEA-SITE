@@ -39,6 +39,7 @@ const Header = (props) => {
             <div>
               <Link className='header-item' to="/">Home</Link>
               <HashLink to="/#quemsomos" className='header-item' scroll={(el) => el.scrollIntoView({ behavior: 'auto', block: 'center' })}>Quem Somos</HashLink>
+              <Link className='header-item' to="/contato">Contato</Link>
               {isAuthenticated ? <Link className='header-item' to="/perfil">Perfil</Link> : <Link className='header-item' to="/login">Login</Link>}
             </div>
           </Container>
