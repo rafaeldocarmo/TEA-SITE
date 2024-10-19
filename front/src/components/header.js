@@ -6,6 +6,7 @@ import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { HashLink } from 'react-router-hash-link';
 import { AuthContext } from '../context/authProvider';
+import logotipo from '../images/logoteatranspsemf.png';
 
 const Header = (props) => {
   const menuRight = useRef(null);
@@ -35,7 +36,10 @@ const Header = (props) => {
     <>
       <header>
           <Container className='header-content header-desktop'>
-            <h1>ESTIMULA TEA</h1>
+            <div className='logotea'>
+              <img src={logotipo} alt="logotipo" width={70} />
+              <h1>ESTIMULA TEA</h1>
+            </div>
             <div>
               <Link className='header-item' to="/">Home</Link>
               <HashLink to="/#quemsomos" className='header-item' scroll={(el) => el.scrollIntoView({ behavior: 'auto', block: 'center' })}>Quem Somos</HashLink>

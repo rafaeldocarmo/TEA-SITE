@@ -18,7 +18,7 @@ header {
         align-items: center;
 
         h1 {
-            font-family: "Bodoni Moda SC", serif;
+            font-family: "Jua", sans-serif;
             color: #0A6894;
             font-weight: bold;
         }
@@ -26,7 +26,7 @@ header {
         div {
             display: flex;
             justify-content: center;
-            gap: 50px;
+            gap: 40px;
 
             .header-item {
                 color: #0A6894;
@@ -190,4 +190,9 @@ footer {
             gap: 15px;
         }
     }
+}
+
+.logotea {
+    justify-content: center;
+    align-items: center;    
 }

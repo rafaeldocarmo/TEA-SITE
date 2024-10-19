@@ -5,6 +5,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Autour+One&family=Jua&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 body{
   padding: 100px 0;
@@ -31,13 +35,16 @@ main{
   text-align: center;
   margin: 100px auto;
   h1{
-    font-family: "Edu AU VIC WA NT Hand", cursive;
-    color: #0A6894;
+    font-family: "Autour One", serif;
+    font-size: xx-large;
+    font-weight: 900;
+    color: #d15c5c;
     line-height: 4rem;
   }
   h3{
-    font-family: "Edu AU VIC WA NT Hand", cursive;
-    color: #0a5375;
+    font-size: larger;
+    font-family: "Autour One", system-ui;
+    color: #287ca4;
     line-height: 2rem;
     margin-bottom: 40px;
   }
@@ -52,7 +59,7 @@ main{
     max-width: 600px;
     padding: 10px 20px;
     margin: 10px 0;
-    font-family: Arial, sans-serif;
+    font-family: "Autour One", system-ui;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
