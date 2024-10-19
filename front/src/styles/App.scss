@@ -21,7 +21,7 @@ body{
 }
 
 main{
-  max-width: 1200px;
+  //max-width: 1200px;
   margin: auto;
 }
 
@@ -30,10 +30,11 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  gap: 50px;
   max-width: 1200px;
   text-align: center;
   margin: 100px auto;
+  margin-bottom: 0px;
   h1{
     font-family: "Autour One", serif;
     font-size: xx-large;
@@ -56,9 +57,9 @@ main{
     text-decoration: none;
     display: block;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     padding: 10px 20px;
-    margin: 10px 0;
+    margin: 6px 0;
     font-family: "Autour One", system-ui;
     font-size: 16px;
     font-weight: bold;
@@ -89,6 +90,11 @@ main{
     background-color: #545b62;
   }
 
+  .buttoncenter{
+    display: flex;
+    justify-content: center;
+  }
+
   @media screen and (max-width: 900px) {
     flex-direction: column;
     gap: 50px;
@@ -110,13 +116,16 @@ main{
   max-width: 1200px;
   margin: 100px auto;
   h1{
-    font-family: "Edu AU VIC WA NT Hand", cursive;
-    color: #0A6894;
+    font-family: "Autour One", serif;
+    font-size: xx-large;
+    font-weight: 900;
+    color: #d15c5c;
     line-height: 4rem;
   }
   h3{
-    font-family: "Edu AU VIC WA NT Hand", cursive;
-    color: #0a5375;
+    font-size: larger;
+    font-family: "Autour One", system-ui;
+    color: #287ca4;
     line-height: 2rem;
     margin-bottom: 40px;
   }
@@ -172,7 +181,16 @@ main{
   }
 }
 
+.principal-accordin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .home-accordion{
+  width: 100%;
+  max-width: 1200px;
   padding: 30px;
   margin-bottom: 50px;
 
@@ -314,16 +332,14 @@ main{
 
 
 .p-quemsomos{
-  width: 100%;
-  max-width: 1200px;
   display: flex;
   justify-content: center;
   background-color: #0A6894;
   padding: 60px 0;
 
   h1 {
-    font-family: "Edu AU VIC WA NT Hand", cursive;
-    color: #ffffff;
+    font-family: "Autour One", serif;
+    color: #dcc73f;
     font-weight: bold;
     padding-bottom: 20px;
   }
@@ -371,7 +387,7 @@ main{
 }
 
 .p-text-quemsomos {
-  width: 70%;
+  width: 62%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -403,7 +419,6 @@ main{
   }
   a{
     font-weight: bold;
-    // text-decoration: none;
     color: #0A6894;
   }
   p{

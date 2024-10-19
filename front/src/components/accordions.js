@@ -58,6 +58,7 @@ const Accordions = () => {
   };
 
   return (
+    <div className='principal-accordin'>
     <Accordion collapseIcon expandIcon className="home-accordion">
         <AccordionTab header={accordionHeader('Conversando sobre TEA')}>
           <p className="m-0">
@@ -68,8 +69,17 @@ const Accordions = () => {
             Esse App se destina a pais e cuidadores com objetivo de orientar e apresentar um Protocolo de Estimulação para crianças com TEA desenvolvido e apresentado no Programa de Pós Graduação Scritu Sensu em Distúrbios do Desenvolvimento.    
           </p>
         </AccordionTab>
-
-
+        <AccordionTab header={accordionHeader('Benefícios')}>
+          <p className="m-0">
+            Com esta ferramenta, você pode: 
+            <br /><br />
+            Visualizar a agenda semanal de forma clara e organizada;
+            <br /><br />
+            Receber orientações sobre cada atividade e como executá-la;
+            <br /><br />
+            Ajustar a programação junto ao terapeuta conforme as necessidades da criança.
+          </p>
+        </AccordionTab>
         <AccordionTab header={accordionHeader('Orientações')}>
           <Stepper ref={stepperRef} style={{ flexBasis: '10rem' }} className="home-stepper">
             <StepperPanel >
@@ -98,6 +108,7 @@ const Accordions = () => {
         </AccordionTab>
         
     </Accordion>
+    </div>
   )
 }
 

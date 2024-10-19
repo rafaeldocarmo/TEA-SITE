@@ -23,8 +23,8 @@ function Home() {
           <div>
             <h3>Acesse e acompanhe a programação desenvolvida especialmente para apoiar o desenvolvimento do seu filho!</h3>
           </div>
-          <div><Link className='button button-primary' to="/login">EXPERIMENTE GRÁTIS</Link></div>
-          <div><Link className='button button-secondary' to="/contato">CONVERSAR COM A GENTE</Link></div>
+          <div className="buttoncenter"><Link className='button button-primary' to="/login">EXPERIMENTE GRÁTIS</Link></div>
+          <div className="buttoncenter"><Link className='button button-secondary' to="/contato">CONVERSAR COM A GENTE</Link></div>
         </div>
       </div>
 
