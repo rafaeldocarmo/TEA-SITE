@@ -161,12 +161,7 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
             </div>
             <div className='flex-row'>
                 <Input type='text' name='responsible-name' onChange={(e) => setUser({ ...user, name: e.target.value })} label="Nome do Responsável" />
-            {hasEspeciality ? (
-                <Input type='text' value={user.especialidade} name='Especialidade' onChange={(e) => setUser({ ...user, especialidade: e.target.value })} label="Especialidade" />
-            ): (
-                <Input type='text' value={user.child_name} name='nome-da-crianca' onChange={(e) => setUser({ ...user, child_name: e.target.value })} label="Nome da criança" />
-            )
-            } 
+                <Input type='text' name='Email' onChange={(e) => setUser({ ...user, email: e.target.value })} label="Email" />
             </div>
             <div className='flex-row'>
                 <Input type='mask' name='data_de_nascimento' onChange={(e) => setUser({ ...user, child_birthdate: e.target.value })} label="Data de nascimento" mask="99/99/9999" />                          
@@ -181,13 +176,21 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
                     </div>
                     <div className='radio-button'>
                         <RadioButton inputId='feminina' name='genero' value="F" onChange={(e) => setUser({ ...user, child_gender: e.value })} checked={user?.genero === 'feminina'} />
-                        <label htmlFor="feminina">Feminina</label>
+                        <label htmlFor="feminina">Feminino</label>
                     </div>
                 </div>
+                <Input type='mask' name='cpf' onChange={(e) => setUser({ ...user, cpf: e.target.value })} label="CPF do resposável" mask="999.999.999-99" style={{width: '200px'}}/>
             </div>
             <div className='flex-row'>
-                <Input type='text' name='Email' onChange={(e) => setUser({ ...user, email: e.target.value })} label="Email" />
-                <Input type='mask' name='cpf' onChange={(e) => setUser({ ...user, cpf: e.target.value })} label="CPF" mask="999.999.999-99" />
+                {hasEspeciality ? (
+                    <Input type='text' value={user.especialidade} name='Especialidade' onChange={(e) => setUser({ ...user, especialidade: e.target.value })} label="Especialidade" />
+                ): (
+                    <>
+                        <Input type='text' value={user.child_name} name='nome-da-crianca' onChange={(e) => setUser({ ...user, child_name: e.target.value })} label="Nome da criança" />
+                        <Input type='number' value={user.idade} name='idade' onChange={(e) => setUser({ ...user, idade: e.target.value })} label="Idade da criança" />
+                    </>
+                )
+              } 
             </div>
             <div className='flex-row'>
                 <FloatLabel>

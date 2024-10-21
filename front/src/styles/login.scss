@@ -1,7 +1,8 @@
 .user-form{
     padding: 30px;
     margin: 0px auto;
-    color: #0A6894;  
+    margin-top: 50px;
+    color: #000;  
     display: flex;
     justify-content: space-between;
     align-self: center;
@@ -25,6 +26,7 @@
     .flex-row{
       display: flex;
       align-items: center;
+      justify-content: space-between;
       margin: 25px 0;
       gap: 10px;
   
@@ -38,19 +40,20 @@
         background: white;
         padding: 12px 20px;
         border-radius: 20px;
-        border: #0A6894 1px solid;
+        border: #000 1px solid;
         .radio-button{
+          display: flex;
           label{
             margin-left: 8px;
-            color: #0A6894;
+            color: #000;
           }
           .p-radiobutton {
               .p-radiobutton-box{
                   background-color: #ebfafe;
-                  border-color: #0A6894;
+                  border-color: #000;
               }
               input:checked + .p-radiobutton-box{
-                  background-color: #0A6894;
+                  background-color: #000;
               }
               .p-radiobutton-icon{
                   display: none;
@@ -60,19 +63,20 @@
       }
   
       .p-float-label{
-        width: fit-content;
+        width: 100%;
         label{
-            color: #0A6894;
+            color: #000;
             padding-left: 10px;
         }
       }
 
       .p-inputtext{
-        border: 1px solid #0A6894;
+        border: 1px solid #000;
         border-radius: 20px;
         margin: 0;
         background-color: white;
-        width: 285px;
+        width: 100%;
+        max-width: 302px;
         
         &:focus{
           box-shadow: none;
@@ -80,11 +84,15 @@
       }
       @media screen and (max-width: 1000px){
         align-items: flex-start;
+        gap: 25px;
 
         .radios-background{
           width: 100%;
         }
 
+        .p-inputtext{
+          max-width: 100%;
+        }
       }
       @media screen and (max-width: 767px){
         flex-direction: column !important;
@@ -101,12 +109,12 @@
     .p-float-label:has(input:focus) label, .p-float-label:has(input.p-filled) label{
       top: -0.45rem;
       padding: 2px 8px;
-      color: #0A6894;  
+      color: #000;  
     }
   
     .save-button{
       border-radius: 20px;
-      background-color: #0A6894;
+      background-color: #000;
       border: none;
       width: 130px;
       margin-top: 10px;

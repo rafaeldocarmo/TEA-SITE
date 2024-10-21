@@ -19,11 +19,14 @@ const ProtectedRoute = ({ children }) => {
             {!isAuthenticated && 
                 <div style={{
                     height: "70vh",
+                    maxWidth: '600px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     fontSize: '24px',
-                    color: '#0A6894'
+                    color: '#000',
+                    margin: 'auto',
+                    textAlign: 'center'
                 }}>
                     Você precisa estar logado para acessar esta página. Em 5 segundos vai ser redirecionado à página de login.
                 </div>

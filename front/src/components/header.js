@@ -21,6 +21,14 @@ const Header = (props) => {
         label: 'Quem Somos',
         command: () => navigate('/#quemsomos')
     },
+    {
+        label: 'Minha Agenda',
+        command: () => navigate('/#agenda')
+    },
+    {
+        label: 'Contato',
+        command: () => navigate('/contato')
+    },
     ...(isAuthenticated ? 
     [{
       label: 'Perfil',
@@ -36,19 +44,20 @@ const Header = (props) => {
     <>
       <header>
           <Container className='header-content header-desktop'>
-            <div className='logotea'>
-              <img src={logotipo} alt="logotipo" width={70} />
-              <h1>ESTIMULA TEA</h1>
-            </div>
             <div>
+              {/* <img src={logotipo} alt="logotipo" width={70} /> */}
               <Link className='header-item' to="/">Home</Link>
+              <HashLink to="/#agenda" className='header-item' scroll={(el) => el.scrollIntoView({ behavior: 'auto', block: 'center' })}>Minha Agenda</HashLink>
               <HashLink to="/#quemsomos" className='header-item' scroll={(el) => el.scrollIntoView({ behavior: 'auto', block: 'center' })}>Quem Somos</HashLink>
               <Link className='header-item' to="/contato">Contato</Link>
-              {isAuthenticated ? <Link className='header-item' to="/perfil">Perfil</Link> : <Link className='header-item' to="/login">Login</Link>}
+            </div>
+            <div className='login'>
+            <i className="pi pi-user"></i>
+            {isAuthenticated ? <Link className='header-item' to="/perfil">Perfil</Link> : <Link className='header-item' to="/login">Login</Link>}
             </div>
           </Container>
           <Container className='header-content header-mobile'>
-            <h1>Estimula TEA</h1>
+            <img src={logotipo} alt="logotipo" width={70} />  
             <Menu model={items} popup ref={menuRight} id="popup_menu_right" className='menu-hamb' />
             <Button icon="pi pi-bars" className="mr-2" unstyled onClick={(event) => menuRight.current.toggle(event)} />
           </Container>

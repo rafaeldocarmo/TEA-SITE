@@ -28,10 +28,18 @@ const Accordions = () => {
     return localStorage.getItem("token") ? true : false;
   };
 
-  const accordionHeader = (text) => {
+  const accordionHeader = (text, type) => {
     return(
       <>
-        <i className="pi pi-comments"></i>
+        {type === 1 ? 
+        <i className={`pi pi-comments`}></i>
+          : type === 2 ? 
+          <i className={`pi pi-check-circle`}></i>
+          : type === 4 ? 
+          <i className={`pi pi-crown`}></i>
+          :
+          <i className={`pi pi-history`}></i>
+        }
         <p>{text}</p>
         <i className="pi pi-angle-down"></i>
       </>
@@ -60,7 +68,7 @@ const Accordions = () => {
   return (
     <div className='principal-accordin'>
     <Accordion collapseIcon expandIcon className="home-accordion">
-        <AccordionTab header={accordionHeader('Conversando sobre TEA')}>
+        <AccordionTab header={accordionHeader('Conversando sobre TEA', 1)}>
           <p className="m-0">
             O Transtorno do Espectro Autista (TEA) é um transtorno do neurodesenvolvimento, caracterizado pelas dificuldades de comunicação e interação social e também comportamentos restritos e repetitivos. 
             <br /><br />
@@ -69,7 +77,7 @@ const Accordions = () => {
             Esse App se destina a pais e cuidadores com objetivo de orientar e apresentar um Protocolo de Estimulação para crianças com TEA desenvolvido e apresentado no Programa de Pós Graduação Scritu Sensu em Distúrbios do Desenvolvimento.    
           </p>
         </AccordionTab>
-        <AccordionTab header={accordionHeader('Benefícios')}>
+        <AccordionTab header={accordionHeader('Benefícios', 4)}>
           <p className="m-0">
             Com esta ferramenta, você pode: 
             <br /><br />
@@ -80,7 +88,7 @@ const Accordions = () => {
             Ajustar a programação junto ao terapeuta conforme as necessidades da criança.
           </p>
         </AccordionTab>
-        <AccordionTab header={accordionHeader('Orientações')}>
+        <AccordionTab header={accordionHeader('Orientações', 2)}>
           <Stepper ref={stepperRef} style={{ flexBasis: '10rem' }} className="home-stepper">
             <StepperPanel >
               <p>Este é um App destinado a pais e terapeutas e contém 1 Protocolo  de Estimulação Psicomotora para criança com TEA a fim de estimular o desenvolvimento psicomotor. </p>
@@ -103,7 +111,7 @@ const Accordions = () => {
           </Stepper>
         </AccordionTab>
 
-        <AccordionTab header={accordionHeader('Intervenções')}>
+        <AccordionTab header={accordionHeader('Intervenções', 3)}>
             <Tree  value={dataAtividades} className="tabela-de-atividades" selectionMode="single" onSelect={onRowSelect} showHeader={false} />
         </AccordionTab>
         

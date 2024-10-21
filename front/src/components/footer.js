@@ -7,9 +7,9 @@ const Footer = () => {
   return (
     <footer>
         <Container className='header-content'>
-        <h1>TEA</h1>
+        <h1>EstimulaTEA</h1>
         <div>
-            <Link className='footer-item' to="/">Contato: TEA@gmail.com</Link>
+            <Link className='footer-item' to="/"><b>Contato:</b> estimulaTEA@gmail.com</Link>
         </div>
         </Container>
     </footer>
