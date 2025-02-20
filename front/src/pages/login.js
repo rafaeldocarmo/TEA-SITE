@@ -16,7 +16,7 @@ import { url } from '../url';
 
 const Login = () => {
 
-    const [user, setUser] = useState({user_type_id: null, name: '', email: '', phone: null, child_name: '', child_gender: '', child_birthdate: null, senha: null});
+    const [user, setUser] = useState({user_type_id: null, name: '', email: '', phone: null, child_name: '', child_gender: '', child_birthdate: null, senha: null, idade_da_crianca: null});
     const [isRegistering, setIsRegistering] = useState(false);
     const toast = useRef(null);
     const navigate = useNavigate()
@@ -42,7 +42,7 @@ const Login = () => {
                 toast.current.show({severity:'success', summary: 'Sucesso', detail:'Usuário logado', life: 3000});
                 const result = await response.json();
                 login(result.token);
-                navigate('/')
+                navigate('/');
                 
             } else {
                 toast.current.show({severity:'error', summary: 'Erro', detail:'Erro ao realizar login', life: 3000});
@@ -54,7 +54,7 @@ const Login = () => {
     };
 
     const items = [{ label: !isRegistering ? 'Login' : 'Cadastro', url: `/login` }];
-    const home = { icon: 'pi pi-home', url: '/' }
+    const home = { icon: 'pi pi-home', url: '/tea-site' }
 
 
     return (
@@ -110,14 +110,19 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
     const [hasEspeciality, setHasEspeciality] = useState(false);
 
     useEffect(() => {
-        const areFieldsFilled = Object.values(user).every(value => value?.trim() !== '');
+        const areFieldsFilled = Object.entries(user)
+            .filter(([key]) => {
+                if (hasEspeciality) return key !== 'idade' && key !== 'child_name';
+                return key !== 'especialidade';
+            })
+            .every(([_, value]) => value?.trim() !== '');
 
         const arePasswordsEqual = user.senha === user.confirmarSenha;
 
         setIsFormValid(areFieldsFilled && arePasswordsEqual);
         
         user.user_type_id === "1" ? setHasEspeciality(true) : setHasEspeciality(false)
-    }, [user]);
+    }, [user, hasEspeciality]);
 
     const OnSave = async () => {
         try {
@@ -187,7 +192,7 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
                 ): (
                     <>
                         <Input type='text' value={user.child_name} name='nome-da-crianca' onChange={(e) => setUser({ ...user, child_name: e.target.value })} label="Nome da criança" />
-                        <Input type='number' value={user.idade} name='idade' onChange={(e) => setUser({ ...user, idade: e.target.value })} label="Idade da criança" />
+                        <Input type='number' value={user.idade_da_crianca} name='idade_da_crianca' onChange={(e) => setUser({ ...user, idade_da_crianca: e.target.value })} label="Idade da criança" />
                     </>
                 )
               } 

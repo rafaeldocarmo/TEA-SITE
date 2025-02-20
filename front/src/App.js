@@ -16,6 +16,7 @@ import Contato from './pages/contato.js'
 function App() {
   return (
     <PrimeReactProvider>
+    {/* <BrowserRouter basename='/tea-site'> */}
       <BrowserRouter>
         <Header />
         <ToastContainer />

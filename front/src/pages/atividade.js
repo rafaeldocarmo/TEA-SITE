@@ -39,7 +39,7 @@ const Atividade = () => {
   };
 
   const items = [{label: currentCategory?.name, url: `/${currentCategory?.slug}` },{ label: currentActivity?.nome }];
-  const home = { icon: 'pi pi-home', url: '/' }
+  const home = { icon: 'pi pi-home', url: '/tea-site' }
   
 
   if (!currentActivity) {

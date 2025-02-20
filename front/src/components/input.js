@@ -7,7 +7,7 @@ const Input = ({name, type, mask, onChange, label, style}) => {
 
   return (
     <FloatLabel>
-        {type === 'text' ? (
+        {type === 'text' || type === 'number' ? (
             <InputText id={name} type={name} onChange={onChange} mask={mask} style={style}/>
         ): (
             <InputMask id={name} type={name} onChange={onChange} mask={mask} />
