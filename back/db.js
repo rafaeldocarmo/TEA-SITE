@@ -1,22 +1,13 @@
 import mysql from "mysql2"
 
 export const db = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "root",
-    database: "tea"
+    host: process.env.DB_HOST || "localhost",
+    port: process.env.DB_PORT || 3306,
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASS || "root",
+    database: process.env.DB_NAME || "tea"
 });
 
-/*export const db = mysql.createConnection({
-    host:       "172.16.50.171",
-    port:       3306,
-    user:       "tea_user",
-    password:   "********",
-    database:   "tea"
-});*/
-
-// Função para conectar e verificar erros
 db.connect((err) => {
     if (err) {
       console.error("Erro ao conectar ao banco de dados:", err);

@@ -9,11 +9,16 @@ const app = express();
 app.use(express.json());
 
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(
+  {
+    origin: process.env.URL_FRONTEND || "http://localhost:3000",
+    credentials: true
+  }
+));
 app.use(userRoutes);
 app.use(express.static('public'));
 
-const port = 3000;
+const port = 3333;
 
 app.listen(port, () => {
   logger.info(`Listening on port ${port}`);
