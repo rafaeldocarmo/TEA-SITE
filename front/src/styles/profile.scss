@@ -11,8 +11,10 @@
     padding: 50px;
     position: relative;
     min-height: 360px;
+    height: fit-content;
     color: #C9E9F2;
-    margin-bottom: 200px;
+    margin-bottom: 40px;
+    margin-top: 30px;
 
     &-content{
         display: flex;
@@ -155,7 +157,7 @@
     }
 
     @media (max-width: 900px){
-        margin-top: 50px;
+        margin-top: 80px;
 
         .selectTab{
             left: 50%;
@@ -176,6 +178,7 @@
 
 
 .dropdown-terapeutas{
+    z-index: 9999;
     .p-dropdown-items-wrapper ul{
         padding-left: 0;
     }

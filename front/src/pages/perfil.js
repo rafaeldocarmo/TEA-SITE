@@ -20,7 +20,7 @@ const Perfil = () => {
     const [userFirstName, setUserFirstName] = useState()
     const toast = useRef()
     const navigate = useNavigate()
-    const { isAuthenticated, user, token, logout } = useContext(AuthContext);
+    const { user, token, logout, getUser } = useContext(AuthContext);
     
 
     // Método para buscas os pacientes disponiveis
@@ -123,6 +123,8 @@ const Perfil = () => {
             setIsTerapeuta(true)
         }
     }, [user])
+
+console.log(user)
   
 
     return (
@@ -138,10 +140,17 @@ const Perfil = () => {
                             <h1>Bem vindo, {userFirstName}</h1>
 
                             <InputText value={user?.name} id='responsible-name' placeholder='Nome do Responsável' disabled/>
-                            <InputText value={user?.cpf} id='responsible-name' placeholder='CPF' disabled/>
                             <InputText value={user?.phone} id='responsible-name' placeholder='Telefone' disabled/>
-                            <InputText value={user?.child_name} id='responsible-name' placeholder='Nome da criança' disabled/>
-                            <InputText value={user?.child_birthdate} id='responsible-name' placeholder='Data de nascimento' disabled/>
+                            {user?.especialidade ?
+                                (
+                                    <InputText value={user?.especialidade} id='responsible-name' placeholder='Especialidade' disabled/>
+                                ) : (
+                                    <>
+                                        <InputText value={user?.child_name} id='responsible-name' placeholder='Nome da criança' disabled/>
+                                        <InputText value={user?.child_birthdate} id='responsible-name' placeholder='Data de nascimento' disabled/>
+                                    </>
+                                )
+                            }
                             <InputText value={user?.email} id='responsible-name' placeholder='Email' disabled/>
                         </div>
                         <Button
@@ -160,7 +169,7 @@ const Perfil = () => {
                                 <Dropdown
                                     value={paciente}
                                     options={listaTerapeutas}
-                                    optionLabel='cpf'
+                                    optionLabel='email'
                                     optionValue='id'
                                     onChange={(e) => setPaciente(e.value)}
                                     placeholder="Selecione um paciente"
@@ -182,7 +191,7 @@ const Perfil = () => {
                                         <div className='accept-card-body'>
                                             <p>Responsável: {item.nome}</p>
                                             <p>Criança: {item.child_name}</p>
-                                            <p>{item.email}</p>
+                                            <p>Email: {item.email}</p>
                                         </div>
                                         <div>
                                             {item.status === "pendente" ? (
@@ -207,9 +216,8 @@ const Perfil = () => {
                                 return (
                                     <div className='accept-card' key={item.id}>
                                         <div className='accept-card-body'>
-                                            <p>Responsável: {item.nome}</p>
-                                            <p>Criança: {item.child_name}</p>
-                                            <p>{item.email}</p>
+                                            <p>Terapeuta: {item.nome}</p>
+                                            <p>Email: {item.email}</p>
                                         </div>
                                         <div>
                                             {item.status === "pendente" ? (

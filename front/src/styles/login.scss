@@ -1,10 +1,10 @@
 .user-form{
     padding: 30px;
     margin: 0px auto;
-    margin-top: 50px;
     color: #000;  
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
     align-self: center;
     gap: 50px;
 
@@ -12,15 +12,20 @@
         margin: auto 0;
         img{
             max-width: 380px;
-            min-width: 300px;
-            width: 100%;
+            width: 65%;
         }
     }
   
     h1{
       margin: auto;
       margin-bottom: 25px;
-      font-weight: bold;
+      font-weight: 300;
+      font-size: 30px;
+    }
+
+    @media screen and (max-width: 1400px){
+      h1{font-size: 24px;}
+      p{font-size: 14px;}
     }
   
     .flex-row{
@@ -82,6 +87,14 @@
           box-shadow: none;
         }
       }
+
+      .login-input input, .login-input{
+        background-color:  #c9e9f270;
+        border-radius: 2px;
+        border-width:  0 0 1px;
+
+      }
+     
       @media screen and (max-width: 1000px){
         align-items: flex-start;
         gap: 25px;
@@ -105,6 +118,31 @@
         }
       }
     }
+
+    .img-container{
+      max-width: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+
+      h2{
+        font-weight: 300;
+        margin-bottom: 15px;
+      }
+      p{
+        margin-bottom: 5%;
+      }
+      @media screen and (max-width: 1400px){
+        h2{
+          font-size: 24px;
+        }
+        p{
+          font-size: 14px;
+        }
+      }
+    }
   
     .p-float-label:has(input:focus) label, .p-float-label:has(input.p-filled) label{
       top: -0.45rem;
@@ -113,35 +151,67 @@
     }
   
     .save-button{
-      border-radius: 20px;
-      background-color: #000;
+      border-radius: 10px;
+      background-color: #6f9aa7;
       border: none;
       width: 130px;
       margin-top: 10px;
     }
+}
+
+.custom-password {
+  position: relative;
+  width: 100%; 
+}
+
+.custom-password .p-password-input {
+  padding-right: 2.5rem; 
+}
+
+.custom-password .p-password .p-password-icon {
+  position: absolute;
+  right: 10px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+}
+
+.container-login{
+  background-color: #C9E9F2;
+  padding: 0;
+  max-width: 100%;
+  height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  
+
+  @media screen and (max-width: 1400px){
+    height: calc(100vh - 120px);
   }
 
-  .custom-password {
-    position: relative;
-    width: 100%; 
+  &-content{
+    background-color: #ebfafe;
+    border-radius: 40px;
+    padding: 20px;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+
   }
 
-  .custom-password .p-password-input {
-    padding-right: 2.5rem; 
-  }
+  &.container-cadastro{
+    height: max-content;
 
-  .custom-password .p-password .p-password-icon {
-    position: absolute;
-    right: 10px; 
-    top: 50%; 
-    transform: translateY(-50%); 
-  }
-
-
-
-  @media (max-width: 1000px) {
-    .user-form {
-        flex-direction: column;
-        padding: 10px;
+    .container-login-content{
+      margin-top: 20px;
+      margin-bottom: 20px;
     }
+  }
+}
+
+
+@media (max-width: 1000px) {
+  .user-form {
+      flex-direction: column;
+      padding: 10px;
+  }
 }

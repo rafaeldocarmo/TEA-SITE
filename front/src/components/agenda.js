@@ -30,6 +30,7 @@ const Agenda = () => {
     
     const onSaveSequencia = async (isPaciente = false) => {
       try {
+        console.log(prepareDataForBackend(sequenciaEscolhidaBack), user.user_type_id === 1 ? pacienteID.user_id : user.id)
           const response = await fetch(`${url}/api/cronograma/`, {
               method: isEdit ? 'PUT' : 'POST',
               headers: {
@@ -37,10 +38,10 @@ const Agenda = () => {
                   'Authorization': `Bearer ${token}`
               },
               body: JSON.stringify({
+                user_id: !isEdit && user.user_type_id === 1 ? pacienteID.user_id : user.id,
                 ...prepareDataForBackend(sequenciaEscolhidaBack),
-                user_id: !isEdit && user.user_type_id === 1 ? pacienteID : user.id,
+                mensagem: mensagemEnviada || '',
                 id: cronoId,
-                mensagem: mensagemEnviada,
                 
               })
             });
@@ -125,13 +126,13 @@ const Agenda = () => {
       {isAuthenticated ?
       <>
 
-        {user?.user_type_id === 1 && listadePacientes.length > 0 &&
+        {user?.user_type_id === 1 &&
           <div className='dropdown-paciente-agenda'>
             <p>Seus pacientes</p>
             <Dropdown
                 value={pacienteID}
                 options={listadePacientes}
-                optionLabel='cpf'
+                optionLabel='email'
                 optionValue='id'
                 onChange={(e) => setPacienteID(e.value)}
                 placeholder="Selecione um paciente"

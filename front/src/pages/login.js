@@ -16,7 +16,7 @@ import { url } from '../url';
 
 const Login = () => {
 
-    const [user, setUser] = useState({user_type_id: null, name: '', email: '', phone: null, child_name: '', child_gender: '', child_birthdate: null, senha: null, idade_da_crianca: null});
+    const [user, setUser] = useState({user_type_id: null, name: '', email: '', phone: null, child_name: '', child_gender: '', child_birthdate: null, senha: null});
     const [isRegistering, setIsRegistering] = useState(false);
     const toast = useRef(null);
     const navigate = useNavigate()
@@ -42,6 +42,7 @@ const Login = () => {
                 toast.current.show({severity:'success', summary: 'Sucesso', detail:'Usuário logado', life: 3000});
                 const result = await response.json();
                 login(result.token);
+                getUser()
                 navigate('/');
                 
             } else {
@@ -53,54 +54,58 @@ const Login = () => {
         }
     };
 
-    const items = [{ label: !isRegistering ? 'Login' : 'Cadastro', url: `/login` }];
-    const home = { icon: 'pi pi-home', url: '/tea-site' }
-
 
     return (
-        <Container>
-            <Toast ref={toast} />
-            <BreadCrumb home={home} model={items} />
-            <section className='user-form'>
-                <div className='form-login'>
+        <Container className={isRegistering ? 'container-login container-cadastro' : 'container-login'}>
+            <Container className='container-login-content'>
+                <Toast ref={toast} />
+                <section className='user-form'>
+                    <div className='form-login'>
 
-                    {!isRegistering ? (
-                        <>
-                            <h1>Login</h1>
+                        {!isRegistering ? (
+                            <>
+                                <h1>Faça login para começar!</h1>
 
-                            <div className='flex-row'>
-                                <Input type='text' name='Email' onChange={(e) => setUser({ ...user, email: e.target.value })} label="Email" />
-                            </div>
-                            <div className='flex-row'>
-                                <FloatLabel>
-                                    <Password id='password' value={user.senha} onChange={(e) => setUser({ ...user, senha: e.target.value })} toggleMask feedback={false}/>
-                                    <label htmlFor="password">Senha</label>
-                                </FloatLabel>
-                            </div>
-                            <div className='flex-row'>
-                                <p>
-                                    Não tem uma conta? <strong style={{ cursor: 'pointer' }} onClick={() => setIsRegistering(true)}>Cadastre-se</strong>
-                                </p>
-                            </div>
-                            <div className='flex-row'>
-                                <Button
-                                    label='Entrar'
-                                    className='save-button'
-                                    onClick={() => handleLogin()}
-                                />
-                            </div>
-                        </>
-                    ) : (
-                        <Cadastro user={user} setUser={setUser} setIsRegistering={setIsRegistering} toast={toast}/>
-                    )}
-                    
-                </div>
-                <div className='flex-row'>
-                    <div className='img-div'>
-                        <img src={loginIMg} alt='criança brincando' />
+                                <div className='flex-row'>
+                                    <Input type='text' name='Email' onChange={(e) => setUser({ ...user, email: e.target.value })} label="Email" className='login-input' />
+                                </div>
+                                <div className='flex-row'>
+                                    <FloatLabel>
+                                        <Password className='login-input' id='password' value={user.senha} onChange={(e) => setUser({ ...user, senha: e.target.value })} toggleMask feedback={false}/>
+                                        <label htmlFor="password">Senha</label>
+                                    </FloatLabel>
+                                </div>
+                                <div className='flex-row'>
+                                    <p>
+                                        Não tem uma conta? <strong style={{ cursor: 'pointer' }} onClick={() => setIsRegistering(true)}>Cadastre-se</strong>
+                                    </p>
+                                </div>
+                                <div className=''>
+                                    <Button
+                                        label='Entrar'
+                                        className='save-button'
+                                        onClick={() => handleLogin()}
+                                    />
+                                </div>
+                            </>
+                        ) : (
+                            <Cadastro user={user} setUser={setUser} setIsRegistering={setIsRegistering} toast={toast}/>
+                        )}
+                        
                     </div>
-                </div>
+                    <div className='img-container'>
+                        <div className='title-login'>
+                            <h2>
+                                Bem-vindo ao Estimula TEA
+                            </h2>
+                            <p>Um guia para pais e cuidadores na estimulação precoce de crianças com Transtorno do Espectro Autista (TEA).</p>
+                        </div>
+                        <div className='img-div'>
+                            <img src={loginIMg} alt='criança brincando' />
+                        </div>
+                    </div>
             </section>
+            </Container>
         </Container>
     );
 }
@@ -110,13 +115,14 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
     const [hasEspeciality, setHasEspeciality] = useState(false);
 
     useEffect(() => {
+        console.log('esp', hasEspeciality)
         const areFieldsFilled = Object.entries(user)
             .filter(([key]) => {
-                if (hasEspeciality) return key !== 'idade' && key !== 'child_name';
+                if (hasEspeciality) return key !== 'child_birthdate' && key !== 'child_name';
                 return key !== 'especialidade';
             })
-            .every(([_, value]) => value?.trim() !== '');
 
+        console.log(areFieldsFilled)
         const arePasswordsEqual = user.senha === user.confirmarSenha;
 
         setIsFormValid(areFieldsFilled && arePasswordsEqual);
@@ -144,7 +150,7 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
     };
 
     return (
-        <>  
+        <Container className=''>
             <h1>Cadastre-se</h1>
 
             <div className='flex-row'>
@@ -165,12 +171,14 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
                 </div>
             </div>
             <div className='flex-row'>
-                <Input type='text' name='responsible-name' onChange={(e) => setUser({ ...user, name: e.target.value })} label="Nome do Responsável" />
+                <Input type='text' name='responsible-name' onChange={(e) => setUser({ ...user, name: e.target.value })} label="Nome" />
                 <Input type='text' name='Email' onChange={(e) => setUser({ ...user, email: e.target.value })} label="Email" />
             </div>
             <div className='flex-row'>
-                <Input type='mask' name='data_de_nascimento' onChange={(e) => setUser({ ...user, child_birthdate: e.target.value })} label="Data de nascimento" mask="99/99/9999" />                          
-                <Input type='mask' name='tel' onChange={(e) => setUser({ ...user, phone: e.target.value })} label="Telefone" mask="(99)99999-9999" />                          
+                <Input type='mask' name='tel' onChange={(e) => setUser({ ...user, phone: e.target.value })} label="Telefone" mask="(99)99999-9999" />    
+                {hasEspeciality && (
+                    <Input type='text' value={user.especialidade} name='Especialidade' onChange={(e) => setUser({ ...user, especialidade: e.target.value })} label="Especialidade" />
+                )}                      
             </div>
             <div className='flex-row'>
                 <div className='radios-background'>
@@ -184,19 +192,16 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
                         <label htmlFor="feminina">Feminino</label>
                     </div>
                 </div>
-                <Input type='mask' name='cpf' onChange={(e) => setUser({ ...user, cpf: e.target.value })} label="CPF do resposável" mask="999.999.999-99" style={{width: '200px'}}/>
             </div>
-            <div className='flex-row'>
-                {hasEspeciality ? (
-                    <Input type='text' value={user.especialidade} name='Especialidade' onChange={(e) => setUser({ ...user, especialidade: e.target.value })} label="Especialidade" />
-                ): (
-                    <>
-                        <Input type='text' value={user.child_name} name='nome-da-crianca' onChange={(e) => setUser({ ...user, child_name: e.target.value })} label="Nome da criança" />
-                        <Input type='number' value={user.idade_da_crianca} name='idade_da_crianca' onChange={(e) => setUser({ ...user, idade_da_crianca: e.target.value })} label="Idade da criança" />
-                    </>
-                )
-              } 
-            </div>
+                {!hasEspeciality && (
+                    <div className='flex-row'>
+                            <>
+                                <Input type='text' value={user.child_name} name='child_name' onChange={(e) => setUser({ ...user, child_name: e.target.value })} label="Nome da criança" />
+                                <Input type='number' value={user.child_birthdate} name='child_birthdate' onChange={(e) => setUser({ ...user, child_birthdate: e.target.value })} label="Idade da criança" />
+                            </>
+                    </div>
+                    )
+                } 
             <div className='flex-row'>
                 <FloatLabel>
                     <Password id='password' onChange={(e) => setUser({ ...user, senha: e.target.value })} toggleMask/>
@@ -220,7 +225,7 @@ const Cadastro = ({ user, setUser, setIsRegistering, toast }) => {
                     disabled={!isFormValid}
                 />
             </div>
-        </>
+        </Container>
     )
 }
 

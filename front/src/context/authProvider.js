@@ -53,6 +53,7 @@ export const AuthProvider = ({ children }) => {
         setToken(null);
         setIsAuthenticated(false);
         setUser([])
+        getUser()
     };
 
     const login = (newToken) => {
