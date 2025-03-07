@@ -25,7 +25,7 @@ export const authController = {
             const hashedPassword = bcrypt.hashSync(senha, 8);
             const qInsertUser = `
                 INSERT INTO users (user_type_id, especialidade, name, email, phone, child_name, child_gender, child_birthdate, senha)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             `;
             const values = [user_type_id, especialidade, name, email, phone, child_name, child_gender, child_birthdate, hashedPassword];
 

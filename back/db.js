@@ -13,6 +13,6 @@ db.connect((err) => {
       console.error("Erro ao conectar ao banco de dados:", err);
       return;
     }
-    console.log("Conexão bem-sucedida com o banco de dados!");
+    console.log("Conexão bem-sucedida com o banco de dados!", db.config.host);
 });
   
