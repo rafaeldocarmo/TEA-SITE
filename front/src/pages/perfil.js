@@ -20,7 +20,7 @@ const Perfil = () => {
     const [userFirstName, setUserFirstName] = useState()
     const toast = useRef()
     const navigate = useNavigate()
-    const { user, token, logout, getUser } = useContext(AuthContext);
+    const { user, token, logout } = useContext(AuthContext);
     
 
     // Método para buscas os pacientes disponiveis
@@ -65,9 +65,7 @@ const Perfil = () => {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Erro ao aceitar amizade.');
             }
-    
-            const data = await response.json();
-    
+        
             fetchAllPacients();
             countRelations()
             toast.current.show({

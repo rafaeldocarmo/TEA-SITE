@@ -1,7 +1,7 @@
 import "../styles/App.scss";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Link } from 'react-router-dom';
-import React, { useEffect } from "react";
+import React  from "react";
 import banner from '../images/logoteasemf.png';
 import midbanner from '../images/diariotea.png';
 import Accordions from "../components/accordions";
