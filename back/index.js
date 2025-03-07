@@ -13,7 +13,7 @@ app.use(cors());
 app.use(userRoutes);
 app.use(express.static('public'));
 
-const port = 3000;
+const port = 8000;
 
 app.listen(port, () => {
   logger.info(`Listening on port ${port}`);

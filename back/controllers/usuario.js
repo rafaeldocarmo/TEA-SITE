@@ -1,4 +1,5 @@
 import { db } from "../db.js"
+import logger from '../logger.js';
 
 export const getUser = (req, res) => {
     const id = req.params.id;
