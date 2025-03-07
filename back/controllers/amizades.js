@@ -1,5 +1,5 @@
 import { db } from "../db.js";
-import logger from "../logger.js"; // Supondo que o arquivo do logger seja logger.js
+import logger from "../logger.js"; 
 
 export const getPatients = (req, res) => {
     logger.info("Iniciando consulta para obter pacientes");

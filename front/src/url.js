@@ -1,2 +1,1 @@
-export const url = 'http://localhost:8000'
-// export const url = 'https://mackleaps.mackenzie.br/tea-backend'
+export const url = process.env.URL_BACKEND || 'http://localhost:8000'
