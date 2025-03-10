@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS tea;
-USE tea;
+CREATE DATABASE IF NOT EXISTS bancotea;
+USE bancotea;
 
 -- Tabela para armazenar os tipos de usuário
 CREATE TABLE IF NOT EXISTS user_types (
