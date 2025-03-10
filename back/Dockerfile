@@ -1,18 +1,16 @@
-FROM node:alpine
+FROM node:18.17.0
 
-WORKDIR /app
+WORKDIR /usr/src/app/back
 
-COPY package*.json ./
-
-ENV http_proxy=http://mackcloud:cloud2019@172.16.50.1:8080
-ENV https_proxy=http://mackcloud:cloud2019@172.16.50.1:8080
+COPY /package*.json ./
 
 RUN npm install
+RUN npm install mysql2
 
-COPY . .
+COPY ./ .
 
-#RUN npm run build
+RUN npm install -g nodemon
 
-EXPOSE 3000
+EXPOSE 8800
 
 CMD ["npm", "start"]

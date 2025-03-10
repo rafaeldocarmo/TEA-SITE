@@ -1,18 +1,17 @@
-FROM node:alpine
+FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /usr/src/app/front
 
-COPY package*.json ./
+COPY /package*.json ./
 
-ENV http_proxy=http://mackcloud:cloud2019@172.16.50.1:8080
-ENV https_proxy=http://mackcloud:cloud2019@172.16.50.1:8080
+COPY /src ./src
+COPY /public ./public
 
-RUN npm install
-
-COPY . .
-
-#RUN npm run build
+RUN npm install \
+    && npm install -g serve \
+    && npm run build \
+    && rm -fr node_modules
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD [ "serve", "-s", "build" ]
