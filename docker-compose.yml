@@ -26,6 +26,7 @@ services:
 
   back:
     build: ./back
+    container_name: backend__c
     ports:
       - 8800:8800
     expose:
@@ -45,9 +46,12 @@ services:
         condition: service_healthy
     networks:
       - tea-network
+    stdin_open: true
+    tty: true
 
   front:
     build: ./front
+    container_name: frontend_c
     ports:
       - 3000:3000
     expose:

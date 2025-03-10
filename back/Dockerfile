@@ -1,16 +1,7 @@
-FROM node:18.17.0
-
-WORKDIR /usr/src/app/back
-
-COPY /package*.json ./
-
+FROM node:18-alpine
+WORKDIR '/app'
+COPY package.json .
 RUN npm install
-RUN npm install mysql2
-
-COPY ./ .
-
-RUN npm install -g nodemon
-
+COPY . .
 EXPOSE 8800
-
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
