@@ -1,9 +1,10 @@
+version: '3'
 services:
   mysql:
     image: mysql:latest
-    container_name: bd-tea
+    container_name: bdtea
     volumes:
-      - ./database/bd-tea.sql:/docker-entrypoint-initdb.d/0_init.sql
+      - ./database/bdtea.sql:/docker-entrypoint-initdb.d/0_init.sql
     ports:
       - 3306:3306
     expose:
@@ -17,6 +18,8 @@ services:
       SERVICE_NAME: mysql
     networks:
       - tea-network
+    restart: always
+    tty: true
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 15s
@@ -24,15 +27,25 @@ services:
       retries: 5
       start_period: 15s
 
-  back:
-    build: ./back
-    container_name: backend__c
-    ports:
-      - 8800:8800
-    expose:
-      - 8800
+  back-end:
+    build: 
+      context: back
+    container_name: back-end
+    working_dir: /usr/src/app
+    networks: 
+      - tea-network
+    volumes: 
+      - ./node:/usr/src/app
+      - /usr/src/app/node_modules
+    tty: true
+    ports: 
+      - "3000:3000"
+    command: npm run start
+    depends_on:
+      mysql:
+        condition: service_healthy
     environment:
-      DB_HOST: bd-tea
+      DB_HOST: bdtea
       DB_PORT: 3306
       DB_USER: 'root'
       DB_PASSWORD: 'password'
@@ -41,26 +54,35 @@ services:
       SERVICE_TAGS: prod
       SERVICE_NAME: nodeappservice
       SERVER_PORT: 8800
-    depends_on:
-      mysql:
-        condition: service_healthy
-    networks:
-      - tea-network
-    stdin_open: true
+  
+  nginx:
+    build: 
+      context: nginx
+    container_name: nginx
+    restart: always
     tty: true
-
-  front:
-    build: ./front
-    container_name: frontend_c
-    ports:
-      - 3000:3000
-    expose:
-      - 3000
+    ports: 
+      - "8000:80"
+    networks: 
+      - tea-network
     depends_on:
-      - mysql
-      - back
-    networks:
-      - tea-network      
+       - back-end
+       - front-end
+
+  front-end:
+    build: 
+      context: front
+    container_name: front-end
+    working_dir: /usr/src/app
+    networks: 
+      - tea-network
+    volumes: 
+      - ./react:/usr/src/app
+      - /usr/src/app/node_modules
+    tty: true
+    ports: 
+      - "3000:3000"
+    command: npm run dev
 
 networks:
   tea-network:

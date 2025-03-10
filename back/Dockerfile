@@ -1,7 +1,9 @@
-FROM node:18-alpine
-WORKDIR '/app'
-COPY package.json .
-RUN npm install
+FROM node:alpine
+
+WORKDIR /usr/src/app
+
 COPY . .
+
+RUN npm install
+
 EXPOSE 8800
-CMD ["node", "index.js"]
