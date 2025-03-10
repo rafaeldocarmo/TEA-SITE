@@ -44,7 +44,19 @@ services:
       mysql:
         condition: service_healthy
     networks:
-      - tea-network     
+      - tea-network
+
+  front:
+    build: ./front
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    depends_on:
+      - mysql
+      - back
+    networks:
+      - tea-network      
 
 networks:
   tea-network:
