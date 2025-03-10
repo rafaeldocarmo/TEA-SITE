@@ -1,9 +1,17 @@
-FROM node:alpine
- 
-WORKDIR /usr/src/app
+FROM node:18-alpine
 
-COPY . .
+WORKDIR /usr/src/app/front-centralflix
 
-RUN npm install
- 
+COPY /package*.json ./
+
+COPY /src ./src
+COPY /public ./public
+
+RUN npm install \
+    && npm install -g serve \
+    && npm run build \
+    && rm -fr node_modules
+
 EXPOSE 3000
+
+CMD [ "serve", "-s", "build" ]

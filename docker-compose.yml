@@ -1,10 +1,9 @@
-version: '3'
 services:
   mysql:
     image: mysql:latest
-    container_name: bdtea
+    container_name: bancotea
     volumes:
-      - ./database/bdtea.sql:/docker-entrypoint-initdb.d/0_init.sql
+      - ./database/bancotea.sql:/docker-entrypoint-initdb.d/0_init.sql
     ports:
       - 3306:3306
     expose:
@@ -18,8 +17,6 @@ services:
       SERVICE_NAME: mysql
     networks:
       - tea-network
-    restart: always
-    tty: true
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 15s
@@ -27,62 +24,39 @@ services:
       retries: 5
       start_period: 15s
 
-  back-end:
-    build: 
-      context: back
-    container_name: back-end
-    working_dir: /usr/src/app
-    networks: 
-      - tea-network
-    volumes: 
-      - ./node:/usr/src/app
-      - /usr/src/app/node_modules
-    tty: true
-    ports: 
-      - "3000:3000"
-    command: npm run start
-    depends_on:
-      mysql:
-        condition: service_healthy
+  back:
+    build: ./back
+    ports:
+      - 8800:8800
+    expose:
+      - 8800
     environment:
-      DB_HOST: bdtea
+      DB_HOST: bancotea
       DB_PORT: 3306
       DB_USER: 'root'
       DB_PASSWORD: 'password'
-      DB_NAME: tea
+      DB_NAME: bancotea
       DB_CONNECTION_LIMIT: 20
       SERVICE_TAGS: prod
       SERVICE_NAME: nodeappservice
       SERVER_PORT: 8800
-  
-  nginx:
-    build: 
-      context: nginx
-    container_name: nginx
-    restart: always
-    tty: true
-    ports: 
-      - "8000:80"
-    networks: 
-      - tea-network
     depends_on:
-       - back-end
-       - front-end
-
-  front-end:
-    build: 
-      context: front
-    container_name: front-end
-    working_dir: /usr/src/app
-    networks: 
+      mysql:
+        condition: service_healthy
+    networks:
       - tea-network
-    volumes: 
-      - ./react:/usr/src/app
-      - /usr/src/app/node_modules
-    tty: true
-    ports: 
-      - "3000:3000"
-    command: npm run dev
+
+  front:
+    build: ./front
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    depends_on:
+      - mysql
+      - back
+    networks:
+      - tea-network      
 
 networks:
   tea-network:
