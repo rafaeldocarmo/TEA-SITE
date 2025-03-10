@@ -1,0 +1,63 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: bd-tea
+    volumes:
+      - ./database/bd-tea.sql:/docker-entrypoint-initdb.d/0_init.sql
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: tea
+      MYSQL_ROOT_PASSWORD: password
+      SERVICE_TAGS: prod
+      SERVICE_NAME: mysql
+    networks:
+      - tea-network
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 15s
+      timeout: 30s
+      retries: 5
+      start_period: 15s
+
+  back:
+    build: ./back
+    ports:
+      - 8800:8800
+    expose:
+      - 8800
+    environment:
+      DB_HOST: bd-tea
+      DB_PORT: 3306
+      DB_USER: 'root'
+      DB_PASSWORD: 'password'
+      DB_NAME: tea
+      DB_CONNECTION_LIMIT: 20
+      SERVICE_TAGS: prod
+      SERVICE_NAME: nodeappservice
+      SERVER_PORT: 8800
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - tea-network
+
+  front:
+    build: ./front
+    ports:
+      - 25000:3000
+    expose:
+      - 3000
+    depends_on:
+      - mysql
+      - back
+    networks:
+      - tea-network      
+
+networks:
+  tea-network:
+    driver: bridge
